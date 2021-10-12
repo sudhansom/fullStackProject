@@ -23,10 +23,16 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  order: [
+  address: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Address',
+    },
+  ],
+  order: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Order',
     },
   ],
 })
