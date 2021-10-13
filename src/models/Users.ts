@@ -1,10 +1,11 @@
 import mongoose, { Document } from 'mongoose'
+import addressSchema, { AddressDocument } from './Address'
 
 export type UserDocument = Document & {
   firstName: string
   lastName: string
   email: string
-  address: string[]
+  address: AddressDocument[]
 }
 
 const userSchema = new mongoose.Schema({
@@ -23,12 +24,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  address: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Address',
-    },
-  ],
+  address: [addressSchema],
   order: [
     {
       type: mongoose.Schema.Types.ObjectId,
