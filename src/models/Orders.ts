@@ -5,7 +5,7 @@ import OrderItem, { OrderItemDocument } from './OrderItem'
 export type OrdersDocument = Document & {
   totalPrice: number
   orderedDate: Date
-  users: UserDocument
+  users: UserDocument[]
   orderItem: OrderItemDocument[]
 }
 const ordersSchema = new mongoose.Schema({
@@ -17,16 +17,16 @@ const ordersSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  users: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Users',
-    required: true,
-  },
+  users: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Users',
+    },
+  ],
   orderItem: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'OrderItem',
-      required: true,
     },
   ],
 })
