@@ -1,10 +1,18 @@
 import express from 'express'
 
-import { createUser, findAll } from '../controllers/user'
+import {
+  findAll,
+  createUser,
+  findById,
+  updateUser,
+  deleteUser,
+} from '../controllers/user'
 
 const router = express.Router()
-console.log('inside users router')
 router.get('/', findAll)
 router.post('/', createUser)
+router.get('/:userId', findById)
+router.put('/:userId', updateUser)
+router.delete('/:userId', deleteUser)
 
 export default router
