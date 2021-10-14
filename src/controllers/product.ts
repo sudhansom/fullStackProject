@@ -26,7 +26,7 @@ export const findById = async (
 ) => {
   try {
     const productId = req.params.productId
-    const result = ProductService.findById(productId)
+    const result = await ProductService.findById(productId)
     res.json(result)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -49,8 +49,45 @@ export const createProduct = async (
       digital,
       variant,
     })
-    await ProductService.create(product)
+    await ProductService.createProduct(product)
     res.json(product)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
+export const deleteProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const productId = req.params.productId
+    await ProductService.deleteProduct(productId)
+    res.status(204).end()
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
+export const updateProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const productId = req.params.productId
+    const update = req.body
+    const result = await ProductService.updateProduct(productId, update)
+    res.json(result)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))

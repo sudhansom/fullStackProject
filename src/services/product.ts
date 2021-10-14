@@ -14,8 +14,34 @@ const findAll = async (): Promise<ProductDocument[]> => {
   return Product.find().sort({ name: 1 })
 }
 
-const create = async (product: ProductDocument): Promise<ProductDocument> => {
+const createProduct = async (
+  product: ProductDocument
+): Promise<ProductDocument> => {
   return product.save()
 }
 
-export default { findById, findAll, create }
+const deleteProduct = async (productId: string) => {
+  const foundProduct = await Product.findByIdAndDelete(productId)
+
+  if (!foundProduct) {
+    throw new NotFoundError(`Product ${productId} not found`)
+  }
+  return foundProduct
+}
+const updateProduct = async (productId: string, update: ProductDocument) => {
+  const foundProduct = await Product.findByIdAndUpdate(productId, update, {
+    new: true,
+  })
+
+  if (!foundProduct) {
+    throw new NotFoundError(`Product ${productId} not found.`)
+  }
+  return foundProduct
+}
+export default {
+  findById,
+  findAll,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+}
