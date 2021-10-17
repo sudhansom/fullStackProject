@@ -4,17 +4,12 @@ import OrderItem, { OrderItemDocument } from './OrderItem'
 
 export type OrdersDocument = Document & {
   totalPrice: number
-  orderedDate: Date
   users: UserDocument[]
   orderItem: OrderItemDocument[]
 }
 const ordersSchema = new mongoose.Schema({
   totalPrice: {
     type: Number,
-    required: true,
-  },
-  orderedDate: {
-    type: Date,
     required: true,
   },
   users: [

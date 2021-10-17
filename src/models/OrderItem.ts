@@ -2,6 +2,7 @@ import mongoose, { Document } from 'mongoose'
 
 export type OrderItemDocument = Document & {
   quantity: number
+  orderedDate: Date
   product: string[]
   order: string[]
 }
@@ -9,6 +10,10 @@ export type OrderItemDocument = Document & {
 const orderItemSchema = new mongoose.Schema({
   quantity: {
     type: Number,
+  },
+  orderedDate: {
+    type: Date,
+    required: true,
   },
   product: [
     {

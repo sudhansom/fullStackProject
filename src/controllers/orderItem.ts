@@ -9,9 +9,10 @@ export const createOrderItem = async (
   next: NextFunction
 ) => {
   try {
-    const { quantity, product = [], order = [] } = req.body
+    const { quantity, orderedDate, product = [], order = [] } = req.body
     const newOrderItem = new OrderItem({
       quantity,
+      orderedDate,
       product,
       order,
     })

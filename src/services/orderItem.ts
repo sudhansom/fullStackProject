@@ -1,6 +1,9 @@
 import { NotFoundError } from '../helpers/apiError'
 import OrderItem, { OrderItemDocument } from '../models/OrderItem'
 
+// import app from '../app'
+// const userName = app.get('userName')
+
 const createOrderItem = async (
   newOrderItem: OrderItemDocument
 ): Promise<OrderItemDocument> => {

@@ -40,10 +40,9 @@ export const createOrder = async (
   next: NextFunction
 ) => {
   try {
-    const { totalPrice, orderedDate, users = [], orderItem = [] } = req.body
+    const { totalPrice, users = [], orderItem = [] } = req.body
     const newOrder = new Orders({
       totalPrice,
-      orderedDate,
       users,
       orderItem,
     })
