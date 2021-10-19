@@ -1,18 +1,32 @@
 import passport from 'passport'
 import passportLocal from 'passport-local'
 import GoogleTokenStrategy from 'passport-google-id-token'
-import { Strategy } from 'passport-jwt'
+import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt'
 import UserService from '../services/user'
+import { JWT_SECRET } from '../util/secrets'
+import { UserDocument } from '../models/Users'
 
 export const googleStrategy = new GoogleTokenStrategy(
   {
     clientId: process.env.GOOGLE_CLIENT_ID,
   },
-  (parsedToken: any, googleId: any, done: any) => {
+  async (parsedToken: any, googleId: any, done: any) => {
     //console.log('parsed token', parsedToken)
     const { given_name, family_name, email } = parsedToken.payload
-    const users = UserService.findOrCreate(given_name, family_name, email)
-    //const user = {'email': 'bkspoudel'}
+    const users = await UserService.findOrCreate(given_name, family_name, email)
+    const user = { email: email }
     done(null, users)
+  }
+)
+
+export const jwtStrategy = new JwtStrategy(
+  {
+    secretOrKey: JWT_SECRET,
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  },
+  (payload: UserDocument, done: any) => {
+    console.log('where is error')
+    const { email } = payload
+    done(email)
   }
 )

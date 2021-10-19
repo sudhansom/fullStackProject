@@ -47,7 +47,8 @@ const findOrCreate = async (
   //return await Users.find().sort({ name: 1 })
   let foundUser = await Users.findOne({ email: email })
   console.log('inside findOrCreate10:-', foundUser)
-  //localStorage.setItem('cart', 'sudha')
+  //localStorage.setItem('cart', JSON.stringify({name:name}))
+  console.log({ name: name })
   if (!foundUser) {
     const newUser = new Users({
       firstName: name,
@@ -63,6 +64,9 @@ const findOrCreate = async (
   return foundUser
   //return 'sudhan'
 }
+const findByEmail = async (email: string): Promise<UserDocument | null> => {
+  return await Users.findOne({ email: email })
+}
 
 export default {
   create,
@@ -71,4 +75,5 @@ export default {
   update,
   deleteUser,
   findOrCreate,
+  findByEmail,
 }

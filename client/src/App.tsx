@@ -1,21 +1,25 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import { GoogleLogin } from 'react-google-login';
 import axios from 'axios'
 
+type Response = {
+  token: string
+}
+
 function App() {
-  const [gButton, setgButton] = useState('flex')
+ 
   const responseGoogle = async (response: any) => {
   console.log('Response from google: -- ',response.tokenId)
   const tokenId = response.tokenId
-  const result = await axios.post('http://localhost:5000/api/v1/google/login', {id_token: tokenId})
-  console.log(result)
-  localStorage.setItem('carts', 'sudhansom...')
+  const result = await axios.post<Response>('http://localhost:5000/api/v1/google/login', {id_token: tokenId})
+  console.log(result.data.token)
+  localStorage.setItem('token', JSON.stringify(result.data.token))
 }
   return (
     <div className="App">
       <h1>Hello world...</h1>
-      <GoogleLogin style={{display:gButton}}
+      <GoogleLogin 
     clientId="446627249737-sj7pmkvsibbf16vkhrsaqqt3kmi42n7j.apps.googleusercontent.com"
     buttonText="Login"
     onSuccess={responseGoogle}
