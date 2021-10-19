@@ -3,9 +3,6 @@ import passportLocal from 'passport-local'
 import GoogleTokenStrategy from 'passport-google-id-token'
 import { Strategy } from 'passport-jwt'
 import UserService from '../services/user'
-import Users, { UserDocument } from '../models/Users'
-import { Request, Response, NextFunction } from 'express'
-import { AddressDocument } from '../models/Address'
 
 export const googleStrategy = new GoogleTokenStrategy(
   {

@@ -8,8 +8,9 @@ function App() {
   const responseGoogle = async (response: any) => {
   console.log('Response from google: -- ',response.tokenId)
   const tokenId = response.tokenId
-  await axios.post('http://localhost:5000/api/v1/google/login', {id_token: tokenId})
-  console.log(response.user)
+  const result = await axios.post('http://localhost:5000/api/v1/google/login', {id_token: tokenId})
+  console.log(result)
+  localStorage.setItem('carts', 'sudhansom...')
 }
   return (
     <div className="App">

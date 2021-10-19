@@ -45,11 +45,21 @@ const findOrCreate = async (
   email: string
 ): Promise<UserDocument | null> => {
   //return await Users.find().sort({ name: 1 })
-  const foundUser = Users.findById('616865a7a23cd71916580b93')
-  console.log('inside findOrCreate:-', foundUser)
+  let foundUser = await Users.findOne({ email: email })
+  console.log('inside findOrCreate10:-', foundUser)
+  //localStorage.setItem('cart', 'sudha')
   if (!foundUser) {
-    throw new NotFoundError('User not found')
+    const newUser = new Users({
+      firstName: name,
+      lastName: lastName,
+      email: email,
+      address: [],
+      order: [],
+    })
+    console.log('inside findOrCreate0:-', newUser)
+    foundUser = await newUser.save()
   }
+
   return foundUser
   //return 'sudhan'
 }
