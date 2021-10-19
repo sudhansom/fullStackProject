@@ -1,11 +1,12 @@
 import mongoose, { Document } from 'mongoose'
 import Users, { UserDocument } from './Users'
-import OrderItem, { OrderItemDocument } from './OrderItem'
+import orderItemSchema, { OrderItemDocument } from './OrderItem'
 
 export type OrdersDocument = Document & {
   totalPrice: number
   users: UserDocument[]
   orderItem: OrderItemDocument[]
+  completed: boolean
 }
 const ordersSchema = new mongoose.Schema({
   totalPrice: {
@@ -18,12 +19,11 @@ const ordersSchema = new mongoose.Schema({
       ref: 'Users',
     },
   ],
-  orderItem: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'OrderItem',
-    },
-  ],
+  orderItem: [orderItemSchema],
+  completed: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 export default mongoose.model<OrdersDocument>('Orders', ordersSchema)

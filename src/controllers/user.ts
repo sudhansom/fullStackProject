@@ -9,6 +9,7 @@ export const findAll = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.log(req.user)
   try {
     res.json(await UserService.findAll())
   } catch (error) {

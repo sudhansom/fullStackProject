@@ -4,7 +4,6 @@ export type OrderItemDocument = Document & {
   quantity: number
   orderedDate: Date
   product: string[]
-  order: string[]
 }
 
 const orderItemSchema = new mongoose.Schema({
@@ -21,11 +20,5 @@ const orderItemSchema = new mongoose.Schema({
       ref: 'Product',
     },
   ],
-  order: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Order',
-    },
-  ],
 })
-export default mongoose.model<OrderItemDocument>('OrderItem', orderItemSchema)
+export default orderItemSchema
