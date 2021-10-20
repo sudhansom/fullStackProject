@@ -1,7 +1,9 @@
 import React from 'react';
+import jwt_decode from 'jwt-decode'
 import './App.css';
 import { GoogleLogin } from 'react-google-login';
 import axios from 'axios'
+
 
 type Response = {
   token: string
@@ -13,9 +15,32 @@ function App() {
   console.log('Response from google: -- ',response.tokenId)
   const tokenId = response.tokenId
   const result = await axios.post<Response>('http://localhost:5000/api/v1/google/login', {id_token: tokenId})
-  console.log(result.data.token)
-  localStorage.setItem('token', JSON.stringify(result.data.token))
+  console.log('why this---',result.data.token)
+  localStorage.setItem('token', result.data.token)
+  const decoded = jwt_decode(result.data.token) as any
+  console.log('decoded token: ', decoded.userData._id)
+  localStorage.setItem('id',decoded.userData._id )
+  console.log('your Id:',localStorage.getItem("id"))
+  
 }
+const addItem = async () => {
+  console.log('you bought me...')
+  const foundUser = await axios.get(`http://localhost:5000/api/v1/users/${localStorage.getItem('id')}`)
+  const order = foundUser.data as any
+  console.log(foundUser)
+  console.log(order.order)
+  if(!order.order.length){
+    // create orderItem and create order
+    // insert order into user
+    const product_id = 'MacBook Pro'
+    const quantity = 1
+
+  }else{
+    // order already exists
+    // if one of the order is incomplete, 
+    // insert orderItem into that order
+  }
+  }
   return (
     <div className="App">
       <h1>Hello world...</h1>
@@ -30,6 +55,7 @@ function App() {
     <h3>Select a product</h3>
     <img src="../client/images/abc.png" height="40px" width="40px" alt="watch"></img>
   </div>
+  <button onClick={addItem}>Add to cart</button>
     </div>
   );
 }

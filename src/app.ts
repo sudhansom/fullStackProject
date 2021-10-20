@@ -1,13 +1,14 @@
 import express from 'express'
 import lusca from 'lusca'
 import dotenv from 'dotenv'
+import jwt_decode from 'jwt-decode'
 
 import userRouter from './routers/user'
 import productRouter from './routers/product'
 import orderRouter from './routers/order'
 import orderItemRouter from './routers/orderItem'
 import loginRouter from './routers/login'
-import { googleStrategy } from './config/passport'
+import { googleStrategy, jwtStrategy } from './config/passport'
 
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
@@ -24,6 +25,7 @@ app.set('port', process.env.PORT || 5000)
 // app.set('userName', process.env.USER1)
 app.use(passport.initialize())
 passport.use(googleStrategy)
+passport.use(jwtStrategy)
 app.use(apiContentType)
 // Use common 3rd-party middlewares
 app.use(compression())

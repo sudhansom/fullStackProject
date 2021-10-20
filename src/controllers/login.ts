@@ -12,12 +12,10 @@ export const findOrCreate = (req: Request, res: Response) => {
   //const user = UserService.findOrCreate('a', 'b', 'c')
   console.log('in loginControllers:-', req.user)
   const userData = req.user as UserDocument
-  try {
-    const token = jwt.sign(userData, JWT_SECRET, { expiresIn: '2h' })
-  } catch (error) {
-    console.log('error....while creating token')
-  }
-  //console.log(token)
+
+  const token = jwt.sign({ userData }, JWT_SECRET, { expiresIn: '2h' })
+
+  console.log(token)
   console.log('userData:', userData)
-  res.json({ token: userData })
+  res.json({ token: token })
 }
