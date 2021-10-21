@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react'
 import axios from 'axios'
-import {ProductDocument} from '../../src/models/Product'
+import {ProductDocument} from '../../../src/models/Product'
 
 import { Button, Card, Container } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import image from './abc.png'
+import image from '../images/abc.png'
 
 function ProductPage() {
     const getAllUsers = async () => {

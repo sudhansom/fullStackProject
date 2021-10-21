@@ -1,6 +1,6 @@
 import React from 'react'
 
-import image from './abc.png'
+import image from '../images/abc.png'
 import jwt_decode from 'jwt-decode'
 import { GoogleLogin } from 'react-google-login';
 import axios from 'axios'

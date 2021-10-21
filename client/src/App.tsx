@@ -5,10 +5,10 @@ import './App.css';
 
 import { Switch, Route } from 'react-router-dom';
 
-import LoginPage from './LoginPage'
-import ProductPage from './ProductPage'
-import Navbar from './Navbar';
-import AddProduct from './AddProduct'
+import LoginPage from './components/LoginPage'
+import ProductPage from './components/ProductPage'
+import Navbar from './components/Navbar';
+import AddProduct from './components/AddProduct'
 
 
 
