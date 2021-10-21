@@ -1,7 +1,6 @@
 import express from 'express'
 import lusca from 'lusca'
 import dotenv from 'dotenv'
-import jwt_decode from 'jwt-decode'
 
 import userRouter from './routers/user'
 import productRouter from './routers/product'

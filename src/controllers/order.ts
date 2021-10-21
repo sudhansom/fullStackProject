@@ -40,11 +40,17 @@ export const createOrder = async (
   next: NextFunction
 ) => {
   try {
-    const { totalPrice, users = [], orderItem = [] } = req.body
+    const {
+      totalPrice,
+      users = [],
+      orderItem = [],
+      completed = false,
+    } = req.body
     const newOrder = new Orders({
       totalPrice,
       users,
       orderItem,
+      completed,
     })
     await OrderServices.createOrder(newOrder)
     res.json(newOrder)

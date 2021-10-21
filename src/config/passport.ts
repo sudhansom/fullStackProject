@@ -11,7 +11,7 @@ export const googleStrategy = new GoogleTokenStrategy(
     clientId: process.env.GOOGLE_CLIENT_ID,
   },
   async (parsedToken: any, googleId: any, done: any) => {
-    //console.log('parsed token', parsedToken)
+    console.log('parsed token', parsedToken)
     const { given_name, family_name, email } = parsedToken.payload
     const users = await UserService.findOrCreate(given_name, family_name, email)
     const user = { email: email }
@@ -24,9 +24,9 @@ export const jwtStrategy = new JwtStrategy(
     secretOrKey: JWT_SECRET,
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   },
-  (payload: UserDocument, done: any) => {
-    console.log('where is error')
+  async (payload: UserDocument, done: any) => {
     const { email } = payload
-    done(email)
+    const user = await UserService.findByEmail(email)
+    done(user)
   }
 )

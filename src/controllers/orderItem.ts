@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import OrderItem from '../models/OrderItem'
+import OrderItem, { OrderItemDocument } from '../models/OrderItem'
 import { BadRequestError, NotFoundError } from '../helpers/apiError'
 import OrderItemService from '../services/orderItem'
 

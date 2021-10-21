@@ -9,9 +9,11 @@ export type OrderItemDocument = Document & {
 const orderItemSchema = new mongoose.Schema({
   quantity: {
     type: Number,
+    default: 0,
   },
   orderedDate: {
     type: Date,
+    default: Date.now,
     required: true,
   },
   product: [
