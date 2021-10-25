@@ -1,9 +1,9 @@
 import React from 'react'
 import logo from '../images/logo.png'
 
-function Navbar() {
+function Footer() {
     return (
-        <div className="navbar">
+        <div className="footer">
             <ul className="leftSide">
                 <li><a href="#"><img src={logo} height="30px" width="40px"></img></a></li>
                 <li><a href="/">Home</a></li>
@@ -19,4 +19,4 @@ function Navbar() {
     )
 }
 
-export default Navbar
+export default Footer

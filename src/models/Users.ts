@@ -5,8 +5,8 @@ export type UserDocument = Document & {
   firstName: string
   lastName: string
   email: string
-  role: string[]
   address: AddressDocument[]
+  order: string[]
 }
 
 const userSchema = new mongoose.Schema({
@@ -30,11 +30,6 @@ const userSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Order',
-    },
-  ],
-  role: [
-    {
-      type: String,
     },
   ],
 })

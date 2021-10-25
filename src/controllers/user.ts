@@ -28,7 +28,7 @@ export const createUser = async (
 ) => {
   try {
     const { firstName, lastName, email, address = [], order = [] } = req.body
-
+    console.log('why does not this work??')
     const user = new Users({
       firstName,
       lastName,
@@ -36,7 +36,9 @@ export const createUser = async (
       address,
       order,
     })
+    console.log(user)
     const result = await UserService.create(user)
+    console.log('result=-', result)
     res.json(result)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -52,6 +54,8 @@ export const updateUser = async (
   res: Response,
   next: NextFunction
 ) => {
+  const user = req.user
+  console.log('user now:-', user)
   try {
     const update = req.body
     const userId = req.params.userId

@@ -5,7 +5,6 @@ import dotenv from 'dotenv'
 import userRouter from './routers/user'
 import productRouter from './routers/product'
 import orderRouter from './routers/order'
-import orderItemRouter from './routers/orderItem'
 import loginRouter from './routers/login'
 import { googleStrategy, jwtStrategy } from './config/passport'
 
@@ -36,7 +35,6 @@ app.use(lusca.xssProtection(true))
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/products', productRouter)
 app.use('/api/v1/orders', orderRouter)
-app.use('/api/v1/orderItems', orderItemRouter)
 app.use('/api/v1/google/login', loginRouter)
 
 // Custom API error handler

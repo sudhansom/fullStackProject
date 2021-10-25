@@ -6,17 +6,18 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 
 import LoginPage from './components/LoginPage'
-import ProductPage from './components/ProductPage'
+import ShowProducts from './components/ShowProducts'
 import Navbar from './components/Navbar';
 import AddProduct from './components/AddProduct'
-
-
-
+import Footer from './components/Footer'
+import HeaderPart from './components/HeaderPart';
+import DetailPage from './components/DetailPage';
 
 function App() {
   return (
     <div>
       <Navbar />
+      <HeaderPart />
       <Switch>
         <Route exact path='/'>
           <LoginPage />
@@ -25,9 +26,13 @@ function App() {
           <AddProduct />
         </Route>
         <Route exact path = '/products/'>
-          <ProductPage />
+          <ShowProducts />
+        </Route>
+        <Route exact path = '/details/'>
+          <DetailPage />
         </Route>
       </Switch>
+      <Footer />
     </div>
   );
   }

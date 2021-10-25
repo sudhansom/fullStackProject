@@ -16,6 +16,6 @@ export const findOrCreate = (req: Request, res: Response) => {
   const token = jwt.sign({ userData }, JWT_SECRET, { expiresIn: '2h' })
 
   console.log(token)
-  console.log('userData:', userData)
+  console.log('userData:~', userData)
   res.json({ token: token })
 }

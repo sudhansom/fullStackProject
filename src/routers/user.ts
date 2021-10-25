@@ -1,4 +1,5 @@
 import express from 'express'
+import passport from 'passport'
 
 import {
   findAll,
@@ -12,7 +13,11 @@ const router = express.Router()
 router.get('/', findAll)
 router.post('/', createUser)
 router.get('/:userId', findById)
-router.put('/:userId', updateUser)
+router.put(
+  '/:userId',
+  passport.authenticate('jwt', { session: false }),
+  updateUser
+) //passport.authenticate('jwt', {session: false}),
 router.delete('/:userId', deleteUser)
 
 export default router

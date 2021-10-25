@@ -4,6 +4,16 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
+
+axios.interceptors.request.use(request => {
+  const token = localStorage.getItem('token') as string
+  const requestHeader = {
+    Authorization: `Bearer ${token}`
+  }
+  request.headers = requestHeader
+  return request
+})
 
 ReactDOM.render(
   <React.StrictMode>

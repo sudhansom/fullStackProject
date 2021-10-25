@@ -7,7 +7,7 @@ const findAll = async (): Promise<UserDocument[]> => {
 }
 
 const create = async (user: UserDocument): Promise<UserDocument> => {
-  return user.save()
+  return await user.save()
 }
 const findById = async (userId: string): Promise<UserDocument> => {
   const foundUser = await Users.findById(userId)
@@ -65,7 +65,12 @@ const findOrCreate = async (
   //return 'sudhan'
 }
 const findByEmail = async (email: string): Promise<UserDocument | null> => {
-  return await Users.findOne({ email: email })
+  console.log('eemail:', email)
+  const foundUser = await Users.findOne({ email: email })
+  if (!foundUser) {
+    throw new NotFoundError(`User ${email} not found`)
+  }
+  return foundUser
 }
 
 export default {

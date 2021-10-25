@@ -15,6 +15,7 @@ export const googleStrategy = new GoogleTokenStrategy(
     const { given_name, family_name, email } = parsedToken.payload
     const users = await UserService.findOrCreate(given_name, family_name, email)
     const user = { email: email }
+    console.log('google user', users)
     done(null, users)
   }
 )
@@ -24,9 +25,9 @@ export const jwtStrategy = new JwtStrategy(
     secretOrKey: JWT_SECRET,
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   },
-  async (payload: UserDocument, done: any) => {
-    const { email } = payload
+  async (payload: any, done: any) => {
+    const { email } = payload.userData
     const user = await UserService.findByEmail(email)
-    done(user)
+    done(null, user)
   }
 )

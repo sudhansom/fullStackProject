@@ -16,6 +16,10 @@ function ProductPage() {
     getAllUsers()
     const allData = JSON.parse(localStorage.getItem('allUsers') as string) as ProductDocument[]
     console.log(allData)
+
+    const addToCart = (e: React.MouseEvent<HTMLButtonElement>, abc: ProductDocument)=>{
+        console.log("clicked one", abc)
+    }
     return (
         <div className="App">
             <Container className="Container">
@@ -31,7 +35,7 @@ function ProductPage() {
                             {abc.price}
                     </Card.Text>
                 </Card.Body>
-                <Button variant="primary" >add to cart</Button>
+                <Button variant="primary" onClick={(e)=>{addToCart(e, abc)}}>add to cart</Button>
             </Card>}) }
             </Container>
         </div>
