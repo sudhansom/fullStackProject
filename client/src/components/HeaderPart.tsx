@@ -6,7 +6,7 @@ function HeaderPart() {
     return (
         <div className="header">
             
-            <img src={image} alt=""  width="100%" height="90%"/>
+            <img src={image} alt=""  width="100%" height="150px"/>
         </div>
     )
 }
