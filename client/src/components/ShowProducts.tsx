@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+
 import {ProductDocument} from '../../../src/models/Product'
 
 import { Button, Card, Container } from 'react-bootstrap'
@@ -31,13 +33,15 @@ function ShowProducts() {
                 { allDatas.map(item => {return (
 
                     <div className="card">
-                    <a href="/details/"><img src={item.images[0]} alt="Nature"   width="100%"/></a>
-                    <div className="details">
-                        <h3>{item.name}</h3>
-                        <h5>{item.price} DKK</h5>
-                        {/*<Button variant="primary" onClick={(e)=>{addToCart(e, item)}}>See More</Button>*/}
-                        <a href="/details/" >See More</a>
-                    </div>
+                        <a href={`/details/${item._id}`}><img src={item.images[0]} alt="Nature"   width="100%"/></a>
+                        <div className="details">
+                            <h3>{item.name}</h3>
+                            <h5>{item.price} DKK</h5>
+                            {/*<Button variant="primary" onClick={(e)=>{addToCart(e, item)}}>See More</Button>*/}
+                            <Link to={`/details/${item.id}`}   />
+                        
+                        </div>
+                   
                 </div> 
                 )})}
                    

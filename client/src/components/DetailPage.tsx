@@ -1,11 +1,17 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
 import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
 import image from '../images/abc.png'
 
+type Params = {
+    productId: string
+}
+
 function DetailPage() {
+    const { productId } = useParams<Params>()
     const addToCart = (e: React.MouseEvent<HTMLButtonElement>)=>{
-        console.log("clicked one")
+        console.log("clicked one", productId)
     }
     return (
         

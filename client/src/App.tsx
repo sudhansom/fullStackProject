@@ -28,7 +28,7 @@ function App() {
         <Route exact path = '/products/'>
           <ShowProducts />
         </Route>
-        <Route exact path = '/details/'>
+        <Route exact path = '/details/:productId'>
           <DetailPage />
         </Route>
       </Switch>
