@@ -31,7 +31,7 @@ function ShowProducts() {
                 { allDatas.map(item => {return (
 
                     <div className="card">
-                    <a href="/details/"><img src={image} alt="Nature"   width="100%"/></a>
+                    <a href="/details/"><img src={item.images[0]} alt="Nature"   width="100%"/></a>
                     <div className="details">
                         <h3>{item.name}</h3>
                         <h5>{item.price} DKK</h5>
