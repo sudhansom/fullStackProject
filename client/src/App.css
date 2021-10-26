@@ -52,7 +52,8 @@ ul {
   justify-items: center;
 }
 Form {
-  margin: 0 auto;
+  margin: 2% auto;
+  width: 40%;
   border: 1px black solid;
   padding: 1em;
 }

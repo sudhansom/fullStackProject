@@ -99,7 +99,19 @@ const selectColor = (e: React.ChangeEvent<HTMLSelectElement>) => {
                             <Row>
                                 <Col>
                                     <Form.Label>Image: </Form.Label>
-                                    <Form.Control type="file" onChange={uploadImage} />
+                                    <Form.Control type="text" onChange={uploadImage} placeholder="copy image url" />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Label>Category: </Form.Label>
+                                    <Form.Control type="text" onChange={uploadImage} />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Label>Quantiy: </Form.Label>
+                                    <Form.Control type="text" onChange={uploadImage} />
                                 </Col>
                             </Row>
                             <Row>
