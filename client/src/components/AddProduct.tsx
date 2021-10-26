@@ -80,6 +80,7 @@ const selectColor = (e: React.ChangeEvent<HTMLSelectElement>) => {
 }
     return (
         <div className="App">
+            <h4>Add product:</h4>
             <Container className="Container">
                 
                     <Form>
