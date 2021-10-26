@@ -31,7 +31,7 @@ function ShowProducts() {
        
             <div className="wrap">
                 { allDatas.map(item => {return (
-
+                    // just to check github
                     <div className="card">
                         <a href={`/details/${item._id}`}><img src={item.images[0]} alt="Nature"   width="100%"/></a>
                         <div className="details">
