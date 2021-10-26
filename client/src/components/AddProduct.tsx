@@ -8,6 +8,7 @@ type Fields = {
     name: string,
     price: number
 }
+//checking gitHub
 type VariantDocument =  {
   brand: string
   size: string
