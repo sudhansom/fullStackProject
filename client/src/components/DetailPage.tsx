@@ -28,14 +28,14 @@ function DetailPage() {
         
             <div>
             <div className="card_details">
-                    <a href="/details/"><img src={image} alt="Nature"   width="100%"/></a>
+                    <a href="/"><img src={image} alt="Nature"   width="100%"/></a>
                     
             </div>
             <div className="card_details">
                     <div>
-                        <a href="/details/"><img src={image} alt="Nature"   width="20%"/></a>
-                        <a href="/details/"><img src={image} alt="Nature"   width="20%"/></a>
-                        <a href="/details/"><img src={image} alt="Nature"   width="20%"/></a>
+                        <a href="/"><img src={image} alt="Nature"   width="20%"/></a>
+                        <a href="/"><img src={image} alt="Nature"   width="20%"/></a>
+                        <a href="/"><img src={image} alt="Nature"   width="20%"/></a>
                     </div>
                     
                     <div>
