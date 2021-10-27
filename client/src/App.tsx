@@ -6,6 +6,7 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 
 import LoginPage from './components/LoginPage'
+import Register from './components/Register'
 import ShowProducts from './components/ShowProducts'
 import AddProduct from './components/AddProduct'
 import Footer from './components/Footer'
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route exact path = '/login/'>
             <LoginPage />
+          </Route>
+          <Route exact path = '/register/'>
+            <Register />
           </Route>
           <Route exact path = '/details/:productId'>
             <DetailPage />
