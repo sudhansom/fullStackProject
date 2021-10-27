@@ -56,6 +56,7 @@ const findOrCreate = async (
       email: email,
       address: [],
       order: [],
+      password: '',
     })
     console.log('inside findOrCreate0:-', newUser)
     foundUser = await newUser.save()

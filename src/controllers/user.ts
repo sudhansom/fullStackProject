@@ -123,10 +123,8 @@ export const emailPasswordCheck = async (
     const password: string = req.body.password
     const user: UserDocument | null = await UserService.findByEmail(email)
     if (user && user.password == password) {
-      console.log('password  matched.... congrats...')
-      res.json(user)
-    } else {
-      console.log('password not matched....')
+      console.log('password  matched.... congrats...', user)
+      next()
     }
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {

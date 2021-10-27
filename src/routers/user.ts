@@ -1,5 +1,6 @@
 import express from 'express'
 import passport from 'passport'
+import { findOrCreate } from '../controllers/login'
 
 import {
   findAll,
@@ -14,7 +15,7 @@ const router = express.Router()
 router.get('/', findAll)
 router.post('/', createUser)
 router.get('/:userId', findById)
-router.post('/login', emailPasswordCheck)
+router.post('/login', emailPasswordCheck, findOrCreate)
 router.put(
   '/:userId',
   passport.authenticate('jwt', { session: false }),
