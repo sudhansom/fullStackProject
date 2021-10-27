@@ -50,7 +50,7 @@ const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
 
 
 //eslint-disable-next-line
-const updateVariants = (e: ChangeEventHandler<HTMLSelectElement>, val: string) => {
+const updateVariants = (e: ChangeEvent<HTMLSelectElement>, val: string) => {
     const values = {...variant}
     values[val] = e.target.value
     setVariant(values)
