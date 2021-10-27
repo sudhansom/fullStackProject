@@ -42,7 +42,15 @@ export const createProduct = async (
   next: NextFunction
 ) => {
   try {
-    const { name, images, price, digital, quantity, variant = [] } = req.body
+    const {
+      name,
+      images,
+      price,
+      digital,
+      quantity,
+      category,
+      variant = [],
+    } = req.body
     const product = new Product({
       name,
       images,
@@ -50,6 +58,7 @@ export const createProduct = async (
       digital,
       quantity,
       variant,
+      category,
     })
     console.log('Image: ', images)
     await ProductService.createProduct(product)

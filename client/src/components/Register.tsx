@@ -15,11 +15,6 @@ type Response = {
 
 type Fields = {
     [type: string] : string
-    // firstName: string,
-    // lastName: string,
-    // email: string,
-    // password1: string,
-    // password2: string
 }
 
 
@@ -48,10 +43,22 @@ function Register(){
         values[value] = e.target.value
         setUserFields(values)
     }
+    const saveUser = async ()=>{
+        console.log('registering....')
+        // const newUser = {
+        //     "firstName": userFields.firstName,
+        //     "lastName": userFields.lastName,
+        //     "email": userFields.email,
+        //     "password": userFields.password1
+        // }
+        const result = await axios.post<any>('http://localhost:5000/api/v1/users/register', userFields)
+        localStorage.setItem('token', JSON.stringify(result.data.token))
+    }
+    console.log(userFields)
     return (
         <div className="App">
             <h4>Register</h4>
-            <Form>
+            <Form >
               <Form.Group>
                             <Row>
                                 <Col>
@@ -82,12 +89,12 @@ function Register(){
                                 </Col>
                             </Row>
                            
-                              <Button style={{margin:"1em"}} type="submit" size="lg">Register</Button>
+                              <Button style={{margin:"1em"}} onClick={saveUser} size="lg">Register</Button>
               
 
                               <GoogleLogin 
                               clientId="446627249737-sj7pmkvsibbf16vkhrsaqqt3kmi42n7j.apps.googleusercontent.com"
-                              buttonText="Login"
+                              buttonText="Google Login"
                               onSuccess={responseGoogle}
                               onFailure={responseGoogle}
                               cookiePolicy={'single_host_origin'}

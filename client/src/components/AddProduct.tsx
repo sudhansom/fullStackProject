@@ -5,7 +5,7 @@ import axios from 'axios'
 import {ProductDocument} from '../../../src/models/Product'
 //import {VariantDocument} from '../../../src/models/Variant'
 type Fields = {
-    [key: string]: string | string[] | Boolean | number | VariantDocument[]
+    [key: string]: string | string[] | boolean | number | VariantDocument[]
 }
 type VariantDocument =  {
   [key: string]: string
@@ -29,8 +29,11 @@ const handleForm = async (e: React.MouseEvent<HTMLButtonElement>)=>{
     e.preventDefault()
     const newProduct = {
         "name": fields.name,
-        "price": fields.price,
-        "digital": false,
+        "images": fields.images,
+        "price": Number(fields.price),
+        "digital": fields.digital,
+        "category": fields.category,
+        "quantity": Number(fields.quantity),
         "variant": [
             {
                 "brand": variant.brand,
@@ -40,7 +43,7 @@ const handleForm = async (e: React.MouseEvent<HTMLButtonElement>)=>{
         ],
        
     }
-    const result = await axios.post<ProductDocument>('http://localhost:5000/api/v1/products', newProduct)
+    const result = await axios.post<any>('http://localhost:5000/api/v1/products', newProduct)
 }
 const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
     const values = {...fields}
@@ -50,7 +53,7 @@ const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
 
 
 //eslint-disable-next-line
-const updateVariants = (e: ChangeEvent<HTMLSelectElement>, val: string) => {
+const updateVariants = (e: React.ChangeEvent<HTMLSelectElement>, val: string) => {
     const values = {...variant}
     values[val] = e.target.value
     setVariant(values)
@@ -66,50 +69,50 @@ const updateVariants = (e: ChangeEvent<HTMLSelectElement>, val: string) => {
                             <Row>
                                 <Col>
                                     <Form.Label>Product Name: </Form.Label>
-                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'name' )}} value={fields.name}/>
+                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'name' )}} />
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
                                     <Form.Label>Price: </Form.Label>
-                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'price' )}} value={fields.price}/>
+                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'price' )}} />
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
                                     <Form.Label>Image: </Form.Label>
-                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'images' )}} value={fields.email}/>
+                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'images' )}} />
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
                                     <Form.Label>Category: </Form.Label>
-                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'category' )}} value={fields.category}/>
+                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'category' )}} />
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
                                     <Form.Label>Quantiy: </Form.Label>
-                                    <Form.Control type="text" onChange={(e: ChangeEvent<HTMLSelectElement>)=>{updateFields(e, 'quantity' )}} value={fields.quantity}/>
+                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'quantity' )}} />
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <select id="brand" className="variant" onChange={(e: ChangeEvent<HTMLSelectElement>)=>{updateVariants(e, 'brand' )}} value={variant.brand}>
+                                    <select id="brand" className="variant" onChange={(e: React.ChangeEvent<HTMLSelectElement>)=>{updateVariants(e, 'brand' )}} value={variant.brand}>
                                         <option value="ios">ios</option>
                                         <option value="mk" >mk</option>
                                         <option value="android">android</option>
                                     </select>
                                 </Col>
                                 <Col>
-                                    <select id="color" className="variant" onChange={(e: ChangeEvent<HTMLSelectElement>)=>{updateVariants(e, 'color' )}} value={variant.color}>
+                                    <select id="color" className="variant" onChange={(e: React.ChangeEvent<HTMLSelectElement>)=>{updateVariants(e, 'color' )}} value={variant.color}>
                                         <option value="red">red</option>
                                         <option value="blue" >blue</option>
                                         <option value="green">green</option>
                                     </select>
                                 </Col>
                                  <Col>
-                                    <select id="size" className="variant" onChange={(e: ChangeEvent<HTMLSelectElement>)=>{updateVariants(e, 'size' )}} value={variant.size}>
+                                    <select id="size" className="variant" onChange={(e: React.ChangeEvent<HTMLSelectElement>)=>{updateVariants(e, 'size' )}} value={variant.size}>
                                         <option value="small">small</option>
                                         <option value="medium" >medium</option>
                                         <option value="large">large</option>

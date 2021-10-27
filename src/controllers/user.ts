@@ -35,7 +35,6 @@ export const createUser = async (
       address = [],
       order = [],
     } = req.body
-    console.log('why does not this work??')
     const user = new Users({
       firstName,
       lastName,
@@ -126,6 +125,41 @@ export const emailPasswordCheck = async (
       console.log('password  matched.... congrats...', user)
       next()
     }
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+export const registerUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log('inside controller reg user...')
+  try {
+    const {
+      firstName,
+      lastName,
+      password,
+      email,
+      address = [],
+      order = [],
+    } = req.body
+    const user = new Users({
+      firstName,
+      lastName,
+      email,
+      address,
+      order,
+      password,
+    })
+    console.log('userRegistered', user)
+    const result = await UserService.create(user)
+    const sendResult = { firstName, lastName, password, email, address, order }
+    next()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
