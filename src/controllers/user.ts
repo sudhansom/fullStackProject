@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { BadRequestError } from '../helpers/apiError'
 
-import Users from '../models/Users'
+import Users, { UserDocument } from '../models/Users'
 import UserService from '../services/user'
 
 export const findAll = async (
@@ -104,6 +104,30 @@ export const findById = async (
     const userId = req.params.userId
     const findById = await UserService.findById(userId)
     res.json(findById)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
+export const emailPasswordCheck = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const email: string = req.body.email
+    const password: string = req.body.password
+    const user: UserDocument | null = await UserService.findByEmail(email)
+    if (user && user.password == password) {
+      console.log('password  matched.... congrats...')
+      res.json(user)
+    } else {
+      console.log('password not matched....')
+    }
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
