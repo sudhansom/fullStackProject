@@ -1,4 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import image from '../images/abc.png'
 import jwt_decode from 'jwt-decode'
@@ -8,23 +10,7 @@ import axios from 'axios'
 type Response = {
   token: string
 }
-const addItem = async () => {
-  console.log('you bought me...')
-  const foundUser = await axios.get(`http://localhost:5000/api/v1/users/${localStorage.getItem('id')}`)
-  const order = foundUser.data as any
-  console.log(foundUser)
-  console.log(order.order)
-  if(!order.order.length){
-    // create orderItem and create order
-    // insert order into user
-    
 
-  }else{
-    // order already exists
-    // if one of the order is incomplete, 
-    // insert orderItem into that order
-  }
-}
 
 function LoginPage(){
     const responseGoogle = async (response: any) => {
@@ -42,21 +28,53 @@ function LoginPage(){
 }
 
     return (
-        <div>
-            <h1>Hello world...</h1>
-                <GoogleLogin 
-                clientId="446627249737-sj7pmkvsibbf16vkhrsaqqt3kmi42n7j.apps.googleusercontent.com"
-                buttonText="Login"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy={'single_host_origin'}
-            />
-            <div>
-                <h3>Select a product</h3>
-                <img src={image} height="40px" width="40px" alt="watch"></img>
-            </div>
-            <button onClick={addItem}>Add to cart</button>
-        </div>
+        <div className="App">
+            <h4>Register</h4>
+            <Form>
+              <Form.Group>
+                            <Row>
+                                <Col>
+                                    <Form.Label>First Name: </Form.Label>
+                                    <Form.Control type="text" />
+                                </Col>
+                                <Col>
+                                    <Form.Label>Last Name: </Form.Label>
+                                    <Form.Control type="text" />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Label>Email: </Form.Label>
+                                    <Form.Control type="text" />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Label>Password </Form.Label>
+                                    <Form.Control type="text" />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Label>Repeat Password </Form.Label>
+                                    <Form.Control type="text" />
+                                </Col>
+                            </Row>
+                           
+                              <Button style={{margin:"1em"}} type="submit" size="lg">Register</Button>
+              
+
+                              <GoogleLogin 
+                              clientId="446627249737-sj7pmkvsibbf16vkhrsaqqt3kmi42n7j.apps.googleusercontent.com"
+                              buttonText="Login"
+                              onSuccess={responseGoogle}
+                              onFailure={responseGoogle}
+                              cookiePolicy={'single_host_origin'}
+                          />
+                            
+            </Form.Group>
+            </Form>
+          </div>
     )
 }
 export default LoginPage

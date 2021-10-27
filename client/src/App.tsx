@@ -7,10 +7,9 @@ import { Switch, Route } from 'react-router-dom';
 
 import LoginPage from './components/LoginPage'
 import ShowProducts from './components/ShowProducts'
-import Navbar from './components/Navbar';
 import AddProduct from './components/AddProduct'
 import Footer from './components/Footer'
-import HeaderPart from './components/HeaderPart';
+import Navbar from './components/Navbar';
 import DetailPage from './components/DetailPage';
 import HomePage from './components/HomePage';
 
@@ -27,6 +26,9 @@ function App() {
           </Route>
           <Route exact path = '/products/'>
             <ShowProducts />
+          </Route>
+          <Route exact path = '/login/'>
+            <LoginPage />
           </Route>
           <Route exact path = '/details/:productId'>
             <DetailPage />
