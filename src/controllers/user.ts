@@ -27,7 +27,14 @@ export const createUser = async (
   next: NextFunction
 ) => {
   try {
-    const { firstName, lastName, email, address = [], order = [] } = req.body
+    const {
+      firstName,
+      lastName,
+      password,
+      email,
+      address = [],
+      order = [],
+    } = req.body
     console.log('why does not this work??')
     const user = new Users({
       firstName,
@@ -35,11 +42,12 @@ export const createUser = async (
       email,
       address,
       order,
+      password,
     })
     console.log(user)
     const result = await UserService.create(user)
-    console.log('result=-', result)
-    res.json(result)
+    const sendResult = { firstName, lastName, password, email, address, order }
+    res.json(sendResult)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
