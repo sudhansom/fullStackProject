@@ -5,6 +5,9 @@ import { Button, Card, Container, Form, Row, Col, Dropdown } from 'react-bootstr
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function Navbar() {
+    const clearLocalStorage = () => {
+        localStorage.clear()
+    }
     return (
         <div>
         <div className="navbar">
@@ -34,8 +37,8 @@ function Navbar() {
                     </Dropdown>
             </div>
             <ul className="rightSide">
-                <li><a href="/login/">Login</a></li>
-                <li>Logout</li>
+                <li style={{display: localStorage.getItem('token')? 'none': 'block'}}><a href="/login/">Login</a></li>
+                <li style={{display: localStorage.getItem('token')? 'block': 'none'}}><a href="#" onClick={clearLocalStorage} >Logout</a></li>
                 <li>Cart</li>
             </ul>
             

@@ -5,7 +5,7 @@ import axios from 'axios'
 import {ProductDocument} from '../../../src/models/Product'
 //import {VariantDocument} from '../../../src/models/Variant'
 type Fields = {
-    [key: string]: string | string[] | boolean | number | VariantDocument[]
+    [key: string]: string | string[] | [] | boolean | number | VariantDocument[]
 }
 type VariantDocument =  {
   [key: string]: string
@@ -13,7 +13,7 @@ type VariantDocument =  {
 function AddProduct() {
     const [fields, setFields] = useState<Fields>({
         name: '',
-        images:'',
+        images:[],
         price: 0,
         digital: false,
         variant: [],
@@ -50,7 +50,6 @@ const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
     values[val] = e.target.value
     setFields(values)
   }
-
 
 //eslint-disable-next-line
 const updateVariants = (e: React.ChangeEvent<HTMLSelectElement>, val: string) => {
