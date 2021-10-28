@@ -3,14 +3,16 @@ import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 import {ProductDocument} from '../../../src/models/Product'
+import { validateLocaleAndSetLanguage } from 'typescript'
 //import {VariantDocument} from '../../../src/models/Variant'
 type Fields = {
-    [key: string]: string | string[] | [] | boolean | number | VariantDocument[]
+    [key: string]: string | string[] | boolean | number | VariantDocument[]
 }
 type VariantDocument =  {
   [key: string]: string
 }
 function AddProduct() {
+    const [image, setImage] = useState('')
     const [fields, setFields] = useState<Fields>({
         name: '',
         images:[],
@@ -47,9 +49,24 @@ const handleForm = async (e: React.MouseEvent<HTMLButtonElement>)=>{
 }
 const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
     const values = {...fields}
-    values[val] = e.target.value
+    if(val.localeCompare("images")){ // doing just opposite 
+        values[val] = e.target.value
+        console.log(val)
+    }else{
+        const a = values.images as string [] 
+        setImage(e.target.value)
+        if(e.target.value){
+            a.push(e.target.value)
+            values.images = a
+        }
+        console.log('it is image field: ', values.images)
+    }
     setFields(values)
   }
+const updateImage = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    setImage('')
+}
 
 //eslint-disable-next-line
 const updateVariants = (e: React.ChangeEvent<HTMLSelectElement>, val: string) => {
@@ -57,6 +74,7 @@ const updateVariants = (e: React.ChangeEvent<HTMLSelectElement>, val: string) =>
     values[val] = e.target.value
     setVariant(values)
   }
+  console.log("images--",fields)
 
     return (
         <div className="App">
@@ -68,7 +86,7 @@ const updateVariants = (e: React.ChangeEvent<HTMLSelectElement>, val: string) =>
                             <Row>
                                 <Col>
                                     <Form.Label>Product Name: </Form.Label>
-                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'name' )}} />
+                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'name' )}} value={`${fields.name}`}/>
                                 </Col>
                             </Row>
                             <Row>
@@ -79,8 +97,8 @@ const updateVariants = (e: React.ChangeEvent<HTMLSelectElement>, val: string) =>
                             </Row>
                             <Row>
                                 <Col>
-                                    <Form.Label>Image: </Form.Label>
-                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'images' )}} />
+                                    <Form.Label>Image: </Form.Label><button onClick={updateImage}>+</button>
+                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'images' )}} value={`${image}`}/>
                                 </Col>
                             </Row>
                             <Row>
