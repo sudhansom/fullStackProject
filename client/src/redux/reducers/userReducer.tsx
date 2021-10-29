@@ -16,7 +16,7 @@ const userReducer = (state=defaultState, action: any) => {
                 user : action.payload,
             }
 
-        case "ON_ERROR":
+        case "ON_ERROR_USER":
             return {
                 ...state,
                 err: action.payload

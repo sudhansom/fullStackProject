@@ -16,7 +16,7 @@ const productReducer = (state=defaultState, action: any) => {
                 product : action.payload,
             }
 
-        case "ON_ERROR":
+        case "ON_ERROR_PRODUCT":
             return {
                 ...state,
                 err: action.payload
