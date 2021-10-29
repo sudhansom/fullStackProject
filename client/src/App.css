@@ -51,9 +51,14 @@ ul {
   justify-items: center;
 }
 Form {
+  width: 35%;
   margin: auto;
   border: 1px black solid;
   padding: 1em;
+}
+.detail Form {
+  width: 100%;
+  background-color: #6cf;
 }
 .btn {
   margin: 10px auto;

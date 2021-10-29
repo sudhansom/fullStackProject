@@ -59,7 +59,6 @@ function DetailPage() {
                     <a href="/"><img src={picture} alt="Nature"   width="100%"/></a>
                      <div>
                          <hr />
-                         <hr />
                         
                         <Form>
                             <Form.Group>

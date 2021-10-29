@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
+import {useDispatch, useSelector} from "react-redux"
+
 import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -7,6 +9,8 @@ import image from '../images/abc.png'
 import jwt_decode from 'jwt-decode'
 import { GoogleLogin } from 'react-google-login';
 import axios from 'axios'
+
+import { getUser } from '../redux/action'
 
 type Response = {
   token: string
@@ -17,6 +21,7 @@ type Fields = {
 
 
 function LoginPage(){
+  const dispatch = useDispatch()
   const [loggedIn, setLoggedIn] = useState(false)
   const [fields, setFields] = useState<Fields>({
     email: '',
@@ -31,12 +36,13 @@ function LoginPage(){
   }
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const users = await axios.post<any>('http://localhost:5000/api/v1/users/login', fields)
-    if(users){
+    const url = 'http://localhost:5000/api/v1/users/login'
+    //const users = await axios.post<any>('http://localhost:5000/api/v1/users/login', fields)
+    dispatch(getUser(url, fields))
+  
+    if(true){
       setLoggedIn(true)
     }
-    console.log('values:', users.data)
-    localStorage.setItem('token', JSON.stringify(users.data.token))
   }
     return (
         <div className="App">

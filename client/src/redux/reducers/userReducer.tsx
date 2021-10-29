@@ -1,19 +1,19 @@
-import {ProductDocument} from '../../../src/models/Product'
+import {UserDocument} from '../../../../src/models/Users'
 type DefaultState = {
-    product: ProductDocument | null,
+    user: UserDocument | null,
     err: any
 }
 
 const defaultState: DefaultState = {
-    product: null,
+    user: null,
     err: ''
 }
-const reducer = (state=defaultState, action: any) => {
+const userReducer = (state=defaultState, action: any) => {
     switch (action.type) {
-        case "PRODUCT_SUCCESS":
+        case "USER_SUCCESS":
             return {
                 ...state,
-                product : action.payload,
+                user : action.payload,
             }
 
         case "ON_ERROR":
@@ -27,4 +27,4 @@ const reducer = (state=defaultState, action: any) => {
     }
 }
 
-export default reducer
+export default userReducer
