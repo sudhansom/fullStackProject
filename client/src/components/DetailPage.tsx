@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { ProductDocument } from '../../../src/models/Product'
+import {useDispatch, useSelector} from "react-redux"
 
 import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
 import image from '../images/abc.png'
@@ -9,28 +9,32 @@ import watch2 from '../images/watch2.png'
 import watch3 from '../images/watch3.png'
 import axios from 'axios'
 
+import { getProduct } from '../redux/action'
+import { ProductDocument } from '../../../src/models/Product'
+
 
 type Params = {
     productId: string
 }
 
 function DetailPage() {
+    const dispatch = useDispatch()
     const [picture, setPicture] = useState(image)
     const [product, setProduct] = useState<ProductDocument | null>(null)
     const { productId } = useParams<Params>()
-    const addToCart = (e: React.MouseEvent<HTMLButtonElement>)=>{
-        console.log("clicked one", productId)
-    }
     
-    useEffect(()=>{
-        axios.get<ProductDocument>(`http://localhost:5000/api/v1/products/${productId}`).then(response => setProduct(response.data))
-    }, [])
+    
     
     console.log(product)
 
     const changePicture = ()=> {
         console.log("clicked picture....")
         setPicture(watch1)
+    }
+
+    const addToCart = (e: React.MouseEvent<HTMLButtonElement>)=>{
+        console.log("clicked one")
+        dispatch(getProduct(productId))
     }
            
     return (
@@ -89,6 +93,7 @@ function DetailPage() {
                         
                         </Form> 
                     </div>
+                    <Button variant="primary" onClick={addToCart}>Add to Cart</Button>  
                     
             </div>
             {/* <div className="card_details">

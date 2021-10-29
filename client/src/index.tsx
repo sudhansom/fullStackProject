@@ -6,6 +6,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
+import { Provider } from 'react-redux'
+
+import {store} from './redux/store'
+
 axios.interceptors.request.use(request => {
   const token = localStorage.getItem('token') as string
   const requestHeader = {
@@ -14,12 +18,16 @@ axios.interceptors.request.use(request => {
   request.headers = requestHeader
   return request
 })
-
+const reduxStore = store 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    
+     <Provider store={reduxStore}>
+        <Router>
+        <App />
+        </Router>
+      
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
