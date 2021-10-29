@@ -1,12 +1,14 @@
 import {UserDocument} from '../../../../src/models/Users'
 type DefaultState = {
     user: UserDocument | null,
-    err: any
+    err: any,
+    isLoggedIn: boolean
 }
 
 const defaultState: DefaultState = {
     user: null,
-    err: ''
+    err: '',
+    isLoggedIn: false,
 }
 const userReducer = (state=defaultState, action: any) => {
     switch (action.type) {
@@ -14,6 +16,7 @@ const userReducer = (state=defaultState, action: any) => {
             return {
                 ...state,
                 user : action.payload,
+                isLoggedIn: true,
             }
 
         case "ON_ERROR_USER":

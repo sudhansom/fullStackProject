@@ -1,10 +1,12 @@
 import React from 'react'
 import logo from '../images/logo.png'
+import {useSelector} from 'react-redux'
 
 import { Button, Card, Container, Form, Row, Col, Dropdown } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function Navbar() {
+    //const isLoggedIn = useSelector(state=>state.userReducer.isLoggedIn) 
     const clearLocalStorage = () => {
         localStorage.clear()
     }
