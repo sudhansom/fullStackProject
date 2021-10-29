@@ -121,6 +121,9 @@ export const emailPasswordCheck = async (
     const email: string = req.body.email
     const password: string = req.body.password
     const user: UserDocument | null = await UserService.findByEmail(email)
+    if (user) {
+      req.user = user
+    }
     if (user && user.password == password) {
       console.log('password  matched.... congrats...', user)
       next()
@@ -148,7 +151,7 @@ export const registerUser = async (
       address = [],
       order = [],
     } = req.body
-    const user = new Users({
+    const newUser = new Users({
       firstName,
       lastName,
       email,
@@ -156,9 +159,10 @@ export const registerUser = async (
       order,
       password,
     })
-    console.log('userRegistered', user)
-    const result = await UserService.create(user)
-    const sendResult = { firstName, lastName, password, email, address, order }
+    console.log('userRegistered', newUser)
+    const result = await UserService.create(newUser)
+    const user = { firstName, lastName, password, email, address, order }
+    req.user = user
     next()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {

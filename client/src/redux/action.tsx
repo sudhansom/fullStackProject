@@ -14,6 +14,7 @@ export const getProduct =  (productId: string) => {
    return async (dispatch: any, getState: any) => {
         try{
             const product = await axios.get<any>(`http://localhost:5000/api/v1/products/${productId}`)
+            localStorage.setItem('product', JSON.stringify(product.data))
             dispatch(successProduct(product.data))
         }catch(err){
             dispatch(onError(err))
@@ -32,7 +33,8 @@ export const getUser = (url: string, fields: Fields ) => {
     return async (dispatch: any, getState: any) => {
         try{
             const user = await axios.post<any>(url, fields)
-            dispatch(successUser(user.data))
+            localStorage.setItem('token', JSON.stringify(user.data.token))
+            dispatch(successUser(user.data.userData))
         }catch(err){
             dispatch(onError(err))
         }

@@ -10,7 +10,7 @@ const defaultState: DefaultState = {
 }
 const productReducer = (state=defaultState, action: any) => {
     switch (action.type) {
-        case "USER_SUCCESS":
+        case "PRODUCT_SUCCESS":
             return {
                 ...state,
                 product : action.payload,
