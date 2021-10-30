@@ -11,7 +11,9 @@ function Navbar() {
     const clearLocalStorage = () => {
         localStorage.clear()
     }
-    const total = JSON.parse(localStorage.getItem('product') as string).length
+    let total = JSON.parse(localStorage.getItem('product') as string)??[]
+    total = total.length
+
 
       
     
