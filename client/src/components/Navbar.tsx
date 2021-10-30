@@ -1,13 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import logo from '../images/logo.png'
+import cart from '../images/cart.png'
 
-import { Button, Card, Container, Form, Row, Col, Dropdown } from 'react-bootstrap'
+import { Dropdown } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function Navbar() {
     const clearLocalStorage = () => {
         localStorage.clear()
     }
+    const total = JSON.parse(localStorage.getItem('product') as string).length
+
+      
+    
+
     return (
         <div>
         <div className="navbar">
@@ -39,8 +45,12 @@ function Navbar() {
             <ul className="rightSide">
                 <li style={{display: localStorage.getItem('token')? 'none': 'block'}}><a href="/login/">Login</a></li>
                 <li style={{display: localStorage.getItem('token')? 'block': 'none'}}><a href="#" onClick={clearLocalStorage} >Logout</a></li>
-                <li>Cart</li>
+                <div className="cart" >
+                    <li><a href='/cartPage'><img className="cartImage" src={cart} width="50px" height="40px"></img></a></li>
+                    <li><a href='/cartPage'>{total}</a></li>
+                </div>
             </ul>
+
             
         </div>
         </div>

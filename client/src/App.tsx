@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import Navbar from './components/Navbar';
 import DetailPage from './components/DetailPage';
 import HomePage from './components/HomePage';
+import CartPage from './components/CartPage'
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route exact path = '/details/:productId'>
             <DetailPage />
+          </Route>
+          <Route exact path = '/cartPage'>
+            <CartPage />
           </Route>
         </Switch>
       <Footer />
