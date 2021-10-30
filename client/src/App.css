@@ -126,3 +126,17 @@ Form {
   margin: 1em;
   height: 20%;
 }
+.cart {
+  display: flex;
+}
+.cart:hover {
+  cursor: pointer;
+}
+.cartContainer {
+  margin-top: 0;
+  margin-left: 5% auto;
+  width: 80%;
+}
+.heading {
+  font-size: 1.5em;
+}
