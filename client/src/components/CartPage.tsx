@@ -27,7 +27,7 @@ function CartPage() {
                 </Row>
 
                 <Row className="heading">
-                    <Col>Item</Col> <Col>Name</Col><Col>Quantity</Col><Col>Total</Col><Col>Remove</Col>
+                    <Col>Item</Col> <Col>Name</Col><Col>Quantity</Col><Col>Total</Col><Col>Variant</Col><Col>Remove</Col>
                 </Row>
                 {cart.map(elem=>{
                     return (
@@ -37,6 +37,7 @@ function CartPage() {
                         <Col>{elem.name}</Col>
                         <Col>{elem.quantity}</Col>
                         <Col>{elem.price}</Col>
+                        <Col>{elem.variant.map(el => {return (<div><span>{el['brand']}</span> / <span>{el['color']}</span> / <span>{el['size']}</span></div>)})}</Col>
                         <Col>X</Col>
                         
                     </Row>

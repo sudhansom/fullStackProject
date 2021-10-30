@@ -15,7 +15,7 @@ export const getProduct =  (productId: string, variants: Fields) => {
             //eslint-disable-next-line
             let productList = localStorage.getItem('product')?(JSON.parse(localStorage.getItem('product') as string)):[]
             const product = await axios.get<any>(`http://localhost:5000/api/v1/products/${productId}`)
-            product.data.variant = variants
+            product.data.variant = [variants]
             productList = [...productList, product.data]
             localStorage.setItem('product', JSON.stringify(productList))
             dispatch(successProduct(product.data))
