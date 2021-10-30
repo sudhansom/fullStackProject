@@ -16,12 +16,22 @@ import { ProductDocument } from '../../../src/models/Product'
 type Params = {
     productId: string
 }
+type VariantDocument =  {
+  [key: string]: string
+}
+
 
 function DetailPage() {
     const dispatch = useDispatch()
     const [picture, setPicture] = useState(image)
     const [product, setProduct] = useState<ProductDocument | null>(null)
     const { productId } = useParams<Params>()
+
+    const [variant, setVariant] = useState<VariantDocument>({
+        brand: "ios",
+        size: "red",
+        color: "small"
+    })
     
     
     
@@ -34,7 +44,13 @@ function DetailPage() {
 
     const addToCart = (e: React.MouseEvent<HTMLButtonElement>)=>{
         console.log("clicked one")
-        dispatch(getProduct(productId))
+        dispatch(getProduct(productId, variant))
+        alert("product added to the cart")
+    }
+    const updateVariants = (e: React.ChangeEvent<HTMLSelectElement>, val: string) => {
+        const values = {...variant}
+        values[val] = e.target.value
+        setVariant(values)
     }
            
     return (
@@ -65,7 +81,7 @@ function DetailPage() {
                                 <Row>
                                     <Col>
                                     <h5>Company</h5>
-                                        <select id="brand" className="variant" >
+                                    <select id="brand" className="variant" onChange={(e: React.ChangeEvent<HTMLSelectElement>)=>{updateVariants(e, 'brand' )}} value={variant.brand}>
                                             <option value="ios">ios</option>
                                             <option value="mk" >mk</option>
                                             <option value="android">android</option>
@@ -73,7 +89,7 @@ function DetailPage() {
                                     </Col>
                                     <Col>
                                     <h5>Color</h5>
-                                        <select id="color" className="variant" >
+                                    <select id="color" className="variant" onChange={(e: React.ChangeEvent<HTMLSelectElement>)=>{updateVariants(e, 'color' )}} value={variant.color}>
                                             <option value="red">red</option>
                                             <option value="blue" >blue</option>
                                             <option value="green">green</option>
@@ -81,7 +97,7 @@ function DetailPage() {
                                     </Col>
                                     <Col>
                                         <h5>Size</h5>
-                                        <select id="size" className="variant" >
+                                        <select id="size" className="variant" onChange={(e: React.ChangeEvent<HTMLSelectElement>)=>{updateVariants(e, 'size' )}} value={variant.size}>
                                             <option value="small">small</option>
                                             <option value="medium" >medium</option>
                                             <option value="large">large</option>
