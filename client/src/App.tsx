@@ -13,7 +13,8 @@ import Footer from './components/Footer'
 import Navbar from './components/Navbar';
 import DetailPage from './components/DetailPage';
 import HomePage from './components/HomePage';
-import CartPage from './components/CartPage'
+import CartPage from './components/CartPage';
+import BuyNow from './components/BuyNow'
 
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route exact path = '/cartPage'>
             <CartPage />
+          </Route>
+          <Route exact path = '/buyNow'>
+            <BuyNow />
           </Route>
         </Switch>
       <Footer />

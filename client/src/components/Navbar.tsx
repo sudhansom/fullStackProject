@@ -10,13 +10,11 @@ function Navbar() {
     //const isLoggedIn = useSelector(state=>state.userReducer.isLoggedIn) 
     const clearLocalStorage = () => {
         localStorage.clear()
+        //eslint-disable-next-line
+        location.href='/';
     }
     let total = JSON.parse(localStorage.getItem('product') as string)??[]
     total = total.length
-
-
-      
-    
 
     return (
         <div>

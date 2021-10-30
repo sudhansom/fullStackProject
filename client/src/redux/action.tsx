@@ -38,6 +38,7 @@ export const getUser = (url: string, fields: Fields ) => {
         try{
             const user = await axios.post<any>(url, fields)
             localStorage.setItem('token', JSON.stringify(user.data.token))
+            localStorage.setItem('user', JSON.stringify(user.data.userData))
             dispatch(successUser(user.data.userData))
         }catch(err){
             dispatch(onErrorUser(err))

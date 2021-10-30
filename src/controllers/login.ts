@@ -11,6 +11,7 @@ import { JWT_SECRET } from '../util/secrets'
 export const findOrCreate = (req: Request, res: Response) => {
   //const user = UserService.findOrCreate('a', 'b', 'c')
   console.log('in loginControllers:-', req.user)
+  req.user.password = ''
   const userData = req.user
 
   const token = jwt.sign({ userData }, JWT_SECRET, { expiresIn: '2h' })

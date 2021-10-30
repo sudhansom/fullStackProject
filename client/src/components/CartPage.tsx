@@ -8,7 +8,10 @@ import { VariantDocument } from '../../../src/models/Variant'
 type Fields = {
     [key: string]:string
 }
-
+const redirectPage = ()=>{
+    //eslint-disable-next-line
+    location.href='/buyNow'
+}
 
 function CartPage() {
     const [total, setTotal] = useState<Number>(0)
@@ -45,7 +48,7 @@ function CartPage() {
                 </Row>
                 
                 <Row className="heading">
-                    <Col><Button variant="success" style={{width:"100%"}}>Checkout</Button></Col>
+                    <Col><Button variant="success" style={{width:"100%"}} onClick={redirectPage}>Checkout</Button></Col>
                 </Row>
             </Card>
         </div>

@@ -140,3 +140,11 @@ Form {
 .heading {
   font-size: 1.5em;
 }
+.paymentPage {
+  display: flex;
+}
+.paymentPage {
+  margin-top: 0;
+  margin-left: 5% auto;
+  width: 80%;
+}

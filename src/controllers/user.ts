@@ -125,6 +125,7 @@ export const emailPasswordCheck = async (
       req.user = user
     }
     if (user && user.password == password) {
+      user.password = ''
       console.log('password  matched.... congrats...', user)
       next()
     }
