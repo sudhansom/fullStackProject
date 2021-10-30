@@ -3,21 +3,16 @@ import Navbar from './Navbar'
 import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {ProductDocument} from '../../../src/models/Product'
+import { VariantDocument } from '../../../src/models/Variant'
+
+type Fields = {
+    [key: string]:string
+}
+
 
 function CartPage() {
     const [total, setTotal] = useState<Number>(0)
-    const cart: ProductDocument[] = JSON.parse(localStorage.getItem('product') as string)
-    let tempCart: string[] = []
-    cart.forEach((current, indx, arr) =>{
-        if(tempCart.includes(current._id)){
-            console.log('it contains', current.name)
-        }
-        else{
-            tempCart.push(current._id)
-        }
-        
-    })
-    console.log('final Cart:', tempCart)
+    const cart: ProductDocument[] = JSON.parse(localStorage.getItem('product') as string) 
     return (
         <div className="homePage">
             <Navbar />
