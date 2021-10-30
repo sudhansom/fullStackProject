@@ -1,10 +1,7 @@
 import React, {useState} from 'react'
 import logo from '../images/logo.png'
-<<<<<<< HEAD
-import {useSelector} from 'react-redux'
-=======
+
 import cart from '../images/cart.png'
->>>>>>> redux
 
 import { Dropdown } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
