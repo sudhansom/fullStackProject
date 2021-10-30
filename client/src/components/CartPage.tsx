@@ -41,7 +41,7 @@ function CartPage() {
                 )})}
                 <hr/>
                 <Row className="heading">
-                    <Col>Total quantity: {"quantity"}</Col> <Col>Total price: {total}</Col>
+                    <Col>Total quantity: {cart.length}</Col> <Col>Total price: 444</Col>
                 </Row>
                 
                 <Row className="heading">

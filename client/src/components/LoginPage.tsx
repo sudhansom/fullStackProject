@@ -39,15 +39,16 @@ function LoginPage(){
     const url = 'http://localhost:5000/api/v1/users/login'
     //const users = await axios.post<any>('http://localhost:5000/api/v1/users/login', fields)
     dispatch(getUser(url, fields))
-  
-    if(true){
-      setLoggedIn(true)
+    if(localStorage.getItem('token') as string){
+      //eslint-disable-next-line
+      location.href = "/";
     }
+    
   }
     return (
         <div className="App">
             <h4>Login</h4>
-            <Form onSubmit={handleSubmit}> 
+            <Form onSubmit={handleSubmit} > 
               <Form.Group>
                             <Row>
                                 <Col>
