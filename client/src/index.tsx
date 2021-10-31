@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import { Provider } from 'react-redux'
 
-import {store} from './redux/store'
+import storeFactory from './redux/store'
 
 axios.interceptors.request.use(request => {
   const token = localStorage.getItem('token') as string
@@ -18,7 +18,7 @@ axios.interceptors.request.use(request => {
   request.headers = requestHeader
   return request
 })
-const reduxStore = store 
+const reduxStore = storeFactory()
 ReactDOM.render(
   <React.StrictMode>
     
