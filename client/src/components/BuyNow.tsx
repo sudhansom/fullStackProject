@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 import Navbar from './Navbar'
 import { AddressDocument } from '../../../src/models/Address'
+import {Store} from '../redux/reducers/index'
 type Fields = {
     [key: string]: string | number
 }
@@ -14,7 +15,7 @@ type Fields = {
 function BuyNow() {
     const [addressRequired, setAddressRequired] = useState<boolean>(true)
     const [address, setAddress] = useState<AddressDocument[]>([])
-    //const address = useSelector(state=>state.userReducer.user)
+    const address1 = useSelector((state: Store)=>state.userReducer.user.address)
     const [fields, setFields] = useState<Fields>({
         street: 'aaa',
         houseNo: 1,
@@ -98,11 +99,11 @@ const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
                     </Form>
                     <div style={{backgroundColor:"lightblue", display:addressRequired?'none':'inline-block'}}>
                         <h3>Your Address </h3>
-                        <p>Street:      { address[0].street}</p>
-                        <p>House No:    { address[0].houseNo}</p>
-                        <p>City:        { address[0].city}</p>
-                        <p>Postal code: { address[0].postalCode}</p>
-                        <p>Country:     { address[0].country}</p>
+                        <p>Street:      { address1[0].street}</p>
+                        <p>House No:    { address1[0].houseNo}</p>
+                        <p>City:        { address1[0].city}</p>
+                        <p>Postal code: { address1[0].postalCode}</p>
+                        <p>Country:     { address1[0].country}</p>
                     </div>
             
            

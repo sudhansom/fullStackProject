@@ -7,4 +7,6 @@ const allReducres = combineReducers({
     productReducer
 })
 
+export type Store = ReturnType<typeof allReducres>
+
 export default allReducres
