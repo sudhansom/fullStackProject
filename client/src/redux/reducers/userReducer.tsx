@@ -1,11 +1,11 @@
 import {UserDocument} from '../../../../src/models/Users'
-type DefaultState = {
+export type DefaultUserState = {
     user: UserDocument | null,
     err: any,
     isLoggedIn: boolean
 }
 
-const defaultState: DefaultState = {
+const defaultState: DefaultUserState = {
     user: null,
     err: '',
     isLoggedIn: false,

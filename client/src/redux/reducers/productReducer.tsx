@@ -1,10 +1,10 @@
 import {ProductDocument} from '../../../../src/models/Product'
-type DefaultState = {
+export type DefaultProductState = {
     product: ProductDocument | null,
     err: any
 }
 
-const defaultState: DefaultState = {
+const defaultState: DefaultProductState = {
     product: null,
     err: ''
 }
