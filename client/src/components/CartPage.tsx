@@ -27,7 +27,7 @@ function CartPage() {
                 <Row className="heading">
                     <Col>Item</Col> <Col>Name</Col><Col>Quantity</Col><Col>Total</Col><Col>Variant</Col><Col>Remove</Col>
                 </Row>
-                {cart.map(elem=>{
+                {cart && cart.map(elem=>{
                     return (
                     <Row>
                         <hr/>
@@ -44,7 +44,7 @@ function CartPage() {
                 )})}
                 <hr/>
                 <Row className="heading">
-                    <Col>Total quantity: {cart.length}</Col> <Col>Total price: 444</Col>
+                    <Col>Total quantity: {cart && cart.length}</Col> <Col>Total price: 444</Col>
                 </Row>
                 
                 <Row className="heading">

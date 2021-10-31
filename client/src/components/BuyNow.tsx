@@ -1,8 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import { useSelector } from 'react-redux'
 import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 import Navbar from './Navbar'
+import { AddressDocument } from '../../../src/models/Address'
 type Fields = {
     [key: string]: string | number
 }
@@ -10,15 +12,29 @@ type Fields = {
 
 
 function BuyNow() {
+    const [addressRequired, setAddressRequired] = useState<boolean>(true)
+    const [address, setAddress] = useState<AddressDocument[]>([])
+    //const address = useSelector(state=>state.userReducer.user)
     const [fields, setFields] = useState<Fields>({
-        street: '',
-        houseNo: 0,
-        postalCode: 0,
-        city: '',
-        country: ''
+        street: 'aaa',
+        houseNo: 1,
+        postalCode: 1,
+        city: 'aaa',
+        country: 'aaa'
     })
-    const user = JSON.parse(localStorage.getItem("user") as string)
+
+    const user = JSON.parse(localStorage.getItem("user") as string)??{"_id":"111"}
     const userId = user._id
+    useEffect(()=>{
+        const address = user.address??[]
+        if(address.length && address[0].street && address[0].city && address[0].houseNo && address[0].postalCode && address[0].country){
+            setAddressRequired(false)
+            console.log('not required address', address)
+            setAddress([address])
+            }
+    }, [])
+    
+        
 const handleForm = async (e: React.MouseEvent<HTMLButtonElement>)=>{
     e.preventDefault()
     const newAddress = {
@@ -44,7 +60,7 @@ const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
         <div className="homePage">
            <Navbar />
            <div className="paymentPage">
-              <Form>
+              <Form style={{backgroundColor:"lightblue", display:addressRequired?'inline-block':'none'}}>
                         <Form.Group>
                             <Row>
                                 <Col>
@@ -78,10 +94,55 @@ const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
                             </Row>
                             
                         </Form.Group>
-                        <Button onClick={handleForm} className="btn" variant="success" type="submit" >Save</Button>
+                        <Button onClick={handleForm} className="btn" variant="success" type="submit" style={{width:"100%"}} >Save</Button>
                     </Form>
+                    <div style={{backgroundColor:"lightblue", display:addressRequired?'none':'inline-block'}}>
+                        <h3>Your Address </h3>
+                        <p>Street:      { address[0].street}</p>
+                        <p>House No:    { address[0].houseNo}</p>
+                        <p>City:        { address[0].city}</p>
+                        <p>Postal code: { address[0].postalCode}</p>
+                        <p>Country:     { address[0].country}</p>
+                    </div>
             
-           </div>
+           
+           <Form style={{backgroundColor:"lightblue"}}>
+                        <Form.Group>
+                            <Row>
+                                <Col>
+                                    <Form.Label>Street: </Form.Label>
+                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'street' )}} value={`${fields.street}`}/>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Label>House no: </Form.Label>
+                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'houseNumber' )}} />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Label>Postal Code: </Form.Label>
+                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'postalCode' )}} />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Label>City: </Form.Label>
+                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'city' )}} />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Label>Country: </Form.Label>
+                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'country' )}} />
+                                </Col>
+                            </Row>
+                            
+                        </Form.Group>
+                        <Button onClick={handleForm} className="btn" variant="success" type="submit"  style={{width:"100%"}}>Save</Button>
+                    </Form>
+                </div>
         </div>
     )
 }

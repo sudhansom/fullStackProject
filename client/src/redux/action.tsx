@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 
 import {ProductDocument} from '../../../src/models/Product'
+import {UserDocument} from '../../../src/models/Users'
+
 //import {VariantDocument} from '../../../src/models/Variant'
 
 type Fields = {
@@ -45,17 +47,17 @@ export const getUser = (url: string, fields: Fields ) => {
         }
     }
 }
-export const successUser = (product: ProductDocument) => {
+export const successUser = (user: UserDocument) => {
     return {
         type: "USER_SUCCESS",
-        payload: product,
+        payload: user,
     }
 }
 
 
 export const onErrorUser = (err: any) => {
     return {
-        type: "ON_ERROR_PRODUCT",
+        type: "ON_ERROR_USER",
         payload: err,
     }
 }
