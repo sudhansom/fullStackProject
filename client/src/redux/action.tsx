@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import {Store} from '../redux/reducers/index'
+import { useSelector } from 'react-redux'
 
 import {ProductDocument} from '../../../src/models/Product'
 import {UserDocument} from '../../../src/models/Users'
@@ -17,18 +19,18 @@ export const getProduct =  (productId: string, variants: Fields) => {
             //eslint-disable-next-line
             let productList = localStorage.getItem('product')?(JSON.parse(localStorage.getItem('product') as string)):[]
             const product = await axios.get<any>(`http://localhost:5000/api/v1/products/${productId}`)
+            console.log('product: ', product.data)
             product.data.variant = [variants]
-            productList = [...productList, product.data]
-            localStorage.setItem('product', JSON.stringify(productList))
-            dispatch(successProduct(product.data))
-            console.log('changed?',product.data)
+            
+            localStorage.setItem('product', JSON.stringify([...productList, product.data]))
+            dispatch(successProduct([...productList, product.data]))
         }catch(err){
             dispatch(onErrorProduct(err))
         }
    }
 }
 
-export const successProduct = (product: ProductDocument) => {
+export const successProduct = (product: ProductDocument[]) => {
     return {
         type: "PRODUCT_SUCCESS",
         payload: product,
@@ -69,3 +71,4 @@ export const onErrorProduct = (err: any) => {
         payload: err,
     }
 }
+

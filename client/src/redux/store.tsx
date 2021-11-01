@@ -18,7 +18,7 @@ storeFactory().subscribe(()=>{
     const product = currentState.productReducer.product
     
     localStorage.setItem('user',JSON.stringify(user))
-    localStorage.setItem('product',product)
+    localStorage.setItem('product',JSON.stringify(product))
     localStorage.setItem('isLoggedIn',JSON.stringify(isLoggedIn))
 
 

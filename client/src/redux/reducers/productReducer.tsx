@@ -1,19 +1,20 @@
 import {ProductDocument} from '../../../../src/models/Product'
 export type DefaultProductState = {
-    product: ProductDocument | null,
+    product: ProductDocument[]
     err: any
 }
 
 const defaultState: DefaultProductState = {
-    product: null,
+    product: [],
     err: ''
 }
 const productReducer = (state=defaultState, action: any) => {
     switch (action.type) {
         case "PRODUCT_SUCCESS":
+            const currentProduct = state.product
             return {
                 ...state,
-                product : action.payload,
+                product :  action.payload
             }
 
         case "ON_ERROR_PRODUCT":

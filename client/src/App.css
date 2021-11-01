@@ -142,10 +142,15 @@ Form {
 }
 .paymentPage {
   display: flex;
-  width: 100%;
+  width: 50%;
 }
 .paymentPage {
   margin-top: 0;
-  margin-left: 5% auto;
+  margin-left: auto;
   width: 80%;
+}
+.address {
+  border: 2px black solid;
+  padding: 1em;
+  margin: 1em;
 }

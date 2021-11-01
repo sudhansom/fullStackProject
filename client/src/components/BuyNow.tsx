@@ -112,19 +112,28 @@ const changeAddress = () => {
                         <Button onClick={handleForm} className="btn" variant="success" type="submit" style={{width:"100%"}} >Save</Button>
                     </Form>
                     
-                        <div style={{backgroundColor:"lightblue", display:addressRequired?'none':'inline-block'}}>
-                        <h3>Your Address </h3>
-                        <p>Street:      { user.address[0].street}</p>
-                        <p>House No:    { user.address[0].houseNo}</p>
-                        <p>City:        { user.address[0].city}</p>
-                        <p>Postal code: { user.address[0].postalCode}</p>
-                        <p>Country:     { user.address[0].country}</p>
-                        <Button onClick={changeAddress} variant="success" style={{width:"100%"}}>Edit</Button>
+                    <div style={{backgroundColor:"lightblue", display:addressRequired?'none':'inline-block'}}>
+                        <div className="address">
+                            <h3>Your Address </h3>
+                            <hr />
+                            <p>Street:      { user.address[0].street}</p>
+                            <hr />
+                            <p>House No:    { user.address[0].houseNo}</p>
+                            <hr />
+                            <p>City:        { user.address[0].city}</p>
+                            <hr />
+                            <p>Postal code: { user.address[0].postalCode}</p>
+                            <hr />
+                            <p>Country:     { user.address[0].country}</p>
+                        </div>
+                        <div className="address">
+                            <Button onClick={changeAddress} variant="success" style={{width:"100%"}}>Edit</Button>
+                        </div>
                     </div>
                     
             
            
-           <Form style={{backgroundColor:"lightblue"}}>
+                    <Form style={{backgroundColor:"lightblue"}}>
                         <Form.Group>
                             <Row>
                                 <Col>
@@ -153,7 +162,7 @@ const changeAddress = () => {
                             </Row>
                             
                         </Form.Group>
-                        <Button onClick={handleForm} className="btn" variant="success" type="submit"  style={{width:"100%"}}>Buy</Button>
+                        <Button onClick={handleForm} className="btn" variant="success" type="submit"  style={{width:"100%"}} disabled={addressRequired}>Buy</Button>
                     </Form>
                 </div>
         </div>
