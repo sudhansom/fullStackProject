@@ -5,7 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 import Navbar from './Navbar'
 import { AddressDocument } from '../../../src/models/Address'
+import { OrderItemDocument} from '../../../src/models/OrderItem'
+import {OrdersDocument} from '../../../src/models/Orders'
+import {UserDocument} from '../../../src/models/Users'
 import {Store} from '../redux/reducers/index'
+import { stringify } from 'querystring'
 type Fields = {
     [key: string]: string | number
 }
@@ -17,6 +21,7 @@ function BuyNow() {
     //const [address, setAddress] = useState<AddressDocument[]>([])
     const isLoggedIn = useSelector((state: Store)=>state.userReducer.isLoggedIn)
     const user = useSelector((state: Store)=>state.userReducer.user)
+    const products = useSelector((state: Store)=>state.productReducer.product)
     if(!user.address.length){
         user.address = [{
             street: '',
@@ -59,7 +64,49 @@ const handleForm = async (e: React.MouseEvent<HTMLButtonElement>)=>{
         "country": fields.country,
     }
     console.log("i am here")
+    // put this in thunk... 
     const result = await axios.put<any>(`http://localhost:5000/api/v1/users/${userId}`, {"address":newAddress})
+}
+const finishOrdering = (e:React.MouseEvent<HTMLButtonElement> ) => {
+    e.preventDefault()
+    console.log('ordering done...', products)
+    type OrderItem = {
+        [key: string]: number
+    }
+    //const orderItem: OrderItem = {}
+
+    type Order = {
+        totalPrice: number,
+        users: [string],
+        orderItem: OrderItem
+        totalQuantity: number
+    }
+    
+    const myOrder: Order = {
+        totalPrice: 0,
+        users:['itsme'],
+        orderItem: {},
+        totalQuantity: 0,
+    }
+        const firstProduct = products[0]._id
+        myOrder.orderItem[firstProduct] = 1
+        myOrder.totalQuantity = 1
+    let tempPrice = 0
+    for (let i=1; i<products.length; i++){
+        console.log('inside product: ', products[i]._id)
+        const allKeys = Object.keys(myOrder.orderItem)
+        if(allKeys.includes(products[i]._id)){
+            myOrder.orderItem[products[i]._id] += 1
+        }else{
+            myOrder.orderItem[products[i]._id] = 1
+        }
+
+        
+        tempPrice += 1
+        myOrder.totalPrice += products[i].price
+        myOrder.totalQuantity += 1
+    }
+    console.log('or1:~', myOrder)
 }
 
 const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
@@ -71,6 +118,7 @@ const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
 const changeAddress = () => {
     setAddressRequired(true)
 }
+
     return (
         <div className="homePage">
            <Navbar />
@@ -162,7 +210,7 @@ const changeAddress = () => {
                             </Row>
                             
                         </Form.Group>
-                        <Button onClick={handleForm} className="btn" variant="success" type="submit"  style={{width:"100%"}} disabled={addressRequired}>Buy</Button>
+                        <Button onClick={finishOrdering} className="btn" variant="success" type="submit"  style={{width:"100%"}} disabled={addressRequired}>Buy</Button>
                     </Form>
                 </div>
         </div>
