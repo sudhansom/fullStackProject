@@ -49,7 +49,7 @@ function Navbar() {
                 <li style={{display: localStorage.getItem('token')? 'block': 'none'}}><a href="#" onClick={clearLocalStorage} >Logout</a></li>
                 <div className="cart" >
                     <li><a href='/cartPage'><img className="cartImage" src={cart} width="50px" height="40px"></img></a></li>
-                    <li><a href='/cartPage'>{total}</a></li>
+                    <li><a href='/cartPage'style={{fontSize: "2em", color:"red", margin:".3em"}}>{total}</a></li>
                 </div>
             </ul>
 
