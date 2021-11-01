@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import {useDispatch} from "react-redux"
+
 import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {UserDocument} from '../../../src/models/Users'
@@ -7,34 +9,41 @@ import image from '../images/abc.png'
 import jwt_decode from 'jwt-decode'
 import { GoogleLogin } from 'react-google-login';
 import axios from 'axios'
-import { stringify } from 'querystring'
+
+import { getUser } from '../redux/action'
 
 type Response = {
   token: string
 }
+type AddressFields = {
+    [key: string] : string | number
+}
 
 type Fields = {
-    [type: string] : string
+    [key: string] : string
 }
 
 
 function Register(){
+    const dispatch = useDispatch()
     const responseGoogle = async (response: any) => {
     console.log('Response from google: -- ',response.tokenId)
     const tokenId = response.tokenId
-    const result = await axios.post<Response>('http://localhost:5000/api/v1/google/login', {id_token: tokenId})
-    console.log('why this---',result.data.token)
-    localStorage.setItem('token', result.data.token)
-    const decoded = jwt_decode(result.data.token) as any
-    console.log('decoded token: ', decoded.userData._id)
-    localStorage.setItem('id',decoded.userData._id )
-    console.log('your Id:',localStorage.getItem("id"))
+    //const result = await axios.post<Response>('http://localhost:5000/api/v1/google/login')
+    const url = 'http://localhost:5000/api/v1/google/login'
+    dispatch(getUser(url, {id_token: tokenId}))
+    //console.log('why this---',result.data.token)
+    //localStorage.setItem('token', result.data.token)
+    //const decoded = jwt_decode(result.data.token) as any
+    //console.log('decoded token: ', decoded.userData._id)
+    ///ocalStorage.setItem('id',decoded.userData._id )
+    //console.log('your Id:',localStorage.getItem("id"))
     }
     const [userFields, setUserFields] = useState<Fields>({
         firstName: '',
         lastName: '',
         email: '',
-        password1: '',
+        password: '',
         password2: '',
     })
     const handleForm = (e: React.ChangeEvent<HTMLInputElement>, attribute: string) => {
@@ -51,8 +60,8 @@ function Register(){
         //     "email": userFields.email,
         //     "password": userFields.password1
         // }
-        const result = await axios.post<any>('http://localhost:5000/api/v1/users/register', userFields)
-        localStorage.setItem('token', JSON.stringify(result.data.token))
+        const url = 'http://localhost:5000/api/v1/users/register'
+        dispatch(getUser(url, userFields))
     }
     console.log(userFields)
     return (
@@ -79,7 +88,7 @@ function Register(){
                             <Row>
                                 <Col>
                                     <Form.Label>Password </Form.Label>
-                                    <Form.Control type="text" name="password1" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{handleForm(e, 'password1' )}} value={userFields.password1}/>
+                                    <Form.Control type="text" name="password" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{handleForm(e, 'password' )}} value={userFields.password}/>
                                 </Col>
                             </Row>
                             <Row>

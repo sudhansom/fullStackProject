@@ -17,7 +17,15 @@ function BuyNow() {
     //const [address, setAddress] = useState<AddressDocument[]>([])
     const isLoggedIn = useSelector((state: Store)=>state.userReducer.isLoggedIn)
     const user = useSelector((state: Store)=>state.userReducer.user)
-    
+    if(!user.address.length){
+        user.address = [{
+            street: '',
+            houseNo: 1,
+            city: '',
+            postalCode: 1,
+            country: '',
+        },]
+    }
     const [fields, setFields] = useState<Fields>({
         street: 'aaa',
         houseNo: 1,
@@ -35,6 +43,8 @@ function BuyNow() {
             setAddressRequired(false)
             console.log('not required address', address)
             //setAddress([address])
+            }else{
+                setAddressRequired(true)
             }
     }, [])
     
@@ -101,7 +111,8 @@ const changeAddress = () => {
                         </Form.Group>
                         <Button onClick={handleForm} className="btn" variant="success" type="submit" style={{width:"100%"}} >Save</Button>
                     </Form>
-                    <div style={{backgroundColor:"lightblue", display:addressRequired?'none':'inline-block'}}>
+                    
+                        <div style={{backgroundColor:"lightblue", display:addressRequired?'none':'inline-block'}}>
                         <h3>Your Address </h3>
                         <p>Street:      { user.address[0].street}</p>
                         <p>House No:    { user.address[0].houseNo}</p>
@@ -110,6 +121,7 @@ const changeAddress = () => {
                         <p>Country:     { user.address[0].country}</p>
                         <Button onClick={changeAddress} variant="success" style={{width:"100%"}}>Edit</Button>
                     </div>
+                    
             
            
            <Form style={{backgroundColor:"lightblue"}}>
