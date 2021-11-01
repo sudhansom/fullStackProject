@@ -16,6 +16,8 @@ const redirectPage = ()=>{
 function CartPage() {
     const [total, setTotal] = useState<Number>(0)
     const cart: ProductDocument[] = JSON.parse(localStorage.getItem('product') as string) 
+
+    
     return (
         <div className="homePage">
             <Navbar />
