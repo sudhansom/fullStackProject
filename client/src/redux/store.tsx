@@ -14,10 +14,13 @@ const storeFactory = ()=>{
 storeFactory().subscribe(()=>{
     const currentState = storeFactory().getState()
     const user = currentState.userReducer.user
+    const isLoggedIn = currentState.userReducer.isLoggedIn
     const product = currentState.productReducer.product
     
     localStorage.setItem('user',JSON.stringify(user))
     localStorage.setItem('product',product)
+    localStorage.setItem('isLoggedIn',JSON.stringify(isLoggedIn))
+
 
     return storeFactory
 })

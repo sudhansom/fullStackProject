@@ -14,8 +14,10 @@ type Fields = {
 
 function BuyNow() {
     const [addressRequired, setAddressRequired] = useState<boolean>(true)
-    const [address, setAddress] = useState<AddressDocument[]>([])
-    const address1 = useSelector((state: Store)=>state.userReducer.user.address)
+    //const [address, setAddress] = useState<AddressDocument[]>([])
+    const isLoggedIn = useSelector((state: Store)=>state.userReducer.isLoggedIn)
+    const user = useSelector((state: Store)=>state.userReducer.user)
+    
     const [fields, setFields] = useState<Fields>({
         street: 'aaa',
         houseNo: 1,
@@ -24,14 +26,15 @@ function BuyNow() {
         country: 'aaa'
     })
 
-    const user = JSON.parse(localStorage.getItem("user") as string)??{"_id":"111"}
-    const userId = user._id
+    //const user = JSON.parse(localStorage.getItem("user") as string)??{"_id":"111"}
+    const userId = user?user._id:"aaa"
     useEffect(()=>{
         const address = user.address??[]
+        console.log('redux address:', address)
         if(address.length && address[0].street && address[0].city && address[0].houseNo && address[0].postalCode && address[0].country){
             setAddressRequired(false)
             console.log('not required address', address)
-            setAddress([address])
+            //setAddress([address])
             }
     }, [])
     
@@ -53,10 +56,11 @@ const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
     const values = {...fields}
      // doing just opposite 
         values[val] = e.target.value
-       
-    
     setFields(values)
   }
+const changeAddress = () => {
+    setAddressRequired(true)
+}
     return (
         <div className="homePage">
            <Navbar />
@@ -99,11 +103,12 @@ const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
                     </Form>
                     <div style={{backgroundColor:"lightblue", display:addressRequired?'none':'inline-block'}}>
                         <h3>Your Address </h3>
-                        <p>Street:      { address1[0].street}</p>
-                        <p>House No:    { address1[0].houseNo}</p>
-                        <p>City:        { address1[0].city}</p>
-                        <p>Postal code: { address1[0].postalCode}</p>
-                        <p>Country:     { address1[0].country}</p>
+                        <p>Street:      { user.address[0].street}</p>
+                        <p>House No:    { user.address[0].houseNo}</p>
+                        <p>City:        { user.address[0].city}</p>
+                        <p>Postal code: { user.address[0].postalCode}</p>
+                        <p>Country:     { user.address[0].country}</p>
+                        <Button onClick={changeAddress} variant="success" style={{width:"100%"}}>Edit</Button>
                     </div>
             
            
@@ -111,28 +116,23 @@ const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
                         <Form.Group>
                             <Row>
                                 <Col>
-                                    <Form.Label>Street: </Form.Label>
+                                    <Form.Label>Card Number: </Form.Label>
                                     <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'street' )}} value={`${fields.street}`}/>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <Form.Label>House no: </Form.Label>
+                                    <Form.Label>cvc: </Form.Label>
                                     <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'houseNumber' )}} />
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <Form.Label>Postal Code: </Form.Label>
+                                    <Form.Label>Name of the woner: </Form.Label>
                                     <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'postalCode' )}} />
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <Form.Label>City: </Form.Label>
-                                    <Form.Control type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{updateFields(e, 'city' )}} />
-                                </Col>
-                            </Row>
+                           
                             <Row>
                                 <Col>
                                     <Form.Label>Country: </Form.Label>
@@ -141,7 +141,7 @@ const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
                             </Row>
                             
                         </Form.Group>
-                        <Button onClick={handleForm} className="btn" variant="success" type="submit"  style={{width:"100%"}}>Save</Button>
+                        <Button onClick={handleForm} className="btn" variant="success" type="submit"  style={{width:"100%"}}>Buy</Button>
                     </Form>
                 </div>
         </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux'
 
 import './App.css';
 
@@ -15,8 +16,12 @@ import DetailPage from './components/DetailPage';
 import HomePage from './components/HomePage';
 import CartPage from './components/CartPage';
 import BuyNow from './components/BuyNow'
+import {Store} from './redux/reducers'
+
+
 
 function App() {
+  const isLoggedIn = useSelector((state: Store)=> state.userReducer.isLoggedIn)
   return (
     <div>
       <Navbar />
@@ -43,7 +48,8 @@ function App() {
             <CartPage />
           </Route>
           <Route exact path = '/buyNow'>
-            <BuyNow />
+            {isLoggedIn?<BuyNow />:<LoginPage />}
+            
           </Route>
         </Switch>
       <Footer />

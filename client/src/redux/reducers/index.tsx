@@ -23,7 +23,7 @@ export const preloadedState: PreloadedState = {
     userReducer:{
         user:localStorage.getItem('user')?(JSON.parse(localStorage.getItem('user') as string)) as UserDocument | null:null,
         err: '',
-        isLoggedIn: false,
+        isLoggedIn: localStorage.getItem('isLoggedIn')?(JSON.parse(localStorage.getItem('isLoggedIn') as string)) as boolean:false,
     },
     productReducer: {
         product:localStorage.getItem('product')?(JSON.parse(localStorage.getItem('product') as string)) as ProductDocument | null:null,

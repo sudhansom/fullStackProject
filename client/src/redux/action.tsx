@@ -41,6 +41,7 @@ export const getUser = (url: string, fields: Fields ) => {
             const user = await axios.post<any>(url, fields)
             localStorage.setItem('token', JSON.stringify(user.data.token))
             localStorage.setItem('user', JSON.stringify(user.data.userData))
+            localStorage.setItem('isLoggedIn', JSON.stringify(true))
             dispatch(successUser(user.data.userData))
         }catch(err){
             dispatch(onErrorUser(err))
