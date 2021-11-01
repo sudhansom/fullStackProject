@@ -70,8 +70,17 @@ const handleForm = async (e: React.MouseEvent<HTMLButtonElement>)=>{
 const finishOrdering = (e:React.MouseEvent<HTMLButtonElement> ) => {
     e.preventDefault()
     console.log('ordering done...', products)
+    type Variant = {
+        [key: string]: any
+    }
+    type Item = {
+        name: string,
+        images: string[],
+        variant: Variant,
+        quantity: number,
+    }
     type OrderItem = {
-        [key: string]: number
+        [key: string]: Item
     }
     //const orderItem: OrderItem = {}
 
@@ -89,16 +98,29 @@ const finishOrdering = (e:React.MouseEvent<HTMLButtonElement> ) => {
         totalQuantity: 0,
     }
         const firstProduct = products[0]._id
-        myOrder.orderItem[firstProduct] = 1
+        myOrder.orderItem[firstProduct] = {
+            name : products[0].name,
+            images : products[0].images,
+            variant: products[0].variant,
+            quantity: 1
+        }
         myOrder.totalQuantity = 1
     let tempPrice = 0
     for (let i=1; i<products.length; i++){
         console.log('inside product: ', products[i]._id)
         const allKeys = Object.keys(myOrder.orderItem)
-        if(allKeys.includes(products[i]._id)){
-            myOrder.orderItem[products[i]._id] += 1
+        if(allKeys.includes(products[i]._id) ){ //&& myOrder.orderItem[products[i]._id].variant[0]['brand']===products[i].variant[0]['brand'] && myOrder.orderItem[products[i]._id].variant[0]['size']===products[i].variant[0]['size'] && myOrder.orderItem[products[i]._id].variant[0]['color']===products[i].variant[0]['color'] ){
+
+            myOrder.orderItem[products[i]._id].quantity += 1
         }else{
-            myOrder.orderItem[products[i]._id] = 1
+           
+            myOrder.orderItem[products[i]._id] = {
+            name : products[i].name,
+            images : products[i].images,
+            variant: products[i].variant,
+            quantity: 1
+        }
+         //console.log('1---',myOrder.orderItem[products[i]._id].variant, '2---', products[i].variant)
         }
 
         
