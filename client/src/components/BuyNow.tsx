@@ -123,7 +123,7 @@ const changeAddress = () => {
         <div className="homePage">
            <Navbar />
            <div className="paymentPage">
-              <Form style={{backgroundColor:"lightblue", display:addressRequired?'inline-block':'none'}}>
+                    <Form style={{backgroundColor:"lightblue", display:addressRequired?'inline-block':'none'}}>
                         <Form.Group>
                             <Row>
                                 <Col>
@@ -180,9 +180,10 @@ const changeAddress = () => {
                     </div>
                     
             
-           
-                    <Form style={{backgroundColor:"lightblue"}}>
-                        <Form.Group>
+                
+                    <Form  style={{backgroundColor:"lightblue"}}>
+                       <div className="address">
+                            <Form.Group>
                             <Row>
                                 <Col>
                                     <Form.Label>Card Number: </Form.Label>
@@ -210,8 +211,12 @@ const changeAddress = () => {
                             </Row>
                             
                         </Form.Group>
-                        <Button onClick={finishOrdering} className="btn" variant="success" type="submit"  style={{width:"100%"}} disabled={addressRequired}>Buy</Button>
+                       </div>
+                        <div className="address">
+                            <Button onClick={finishOrdering} className="btn" variant="success" type="submit"  style={{width:"100%"}} disabled={addressRequired}>Buy</Button>
+                        </div>
                     </Form>
+                
                 </div>
         </div>
     )
