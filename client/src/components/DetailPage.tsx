@@ -42,6 +42,10 @@ function DetailPage() {
         console.log("clicked picture....")
        // setPicture(watch1)
     }
+    const goBack = (e: React.MouseEvent<HTMLButtonElement>)=>{
+        //eslint-disable-next-line
+        location.href = "/products"
+    }
 
     const addToCart = (e: React.MouseEvent<HTMLButtonElement>)=>{
         console.log("clicked one")
@@ -69,17 +73,17 @@ function DetailPage() {
                     </div>
                     <hr />
                     <div className="each_photo">
-                        <a href="/"><img src={oneProduct.images[0]} alt="Nature"   width="100%"/></a> 
+                        <a href="#"><img src={oneProduct.images[0]} alt="Nature"   width="100%"/></a> 
                     </div>
                     <hr />
                     <div className="each_photo">
-                        <a href="/"><img src={oneProduct.images[0]} alt="Nature"   width="100%"/></a> 
+                        <a href="#"><img src={oneProduct.images[0]} alt="Nature"   width="100%"/></a> 
                     </div>
                     <hr />
                
                 </div>
                 <div className="card_details" >
-                    <a href="/"><img src={oneProduct.images[0]} alt="Nature"   width="100%"/></a>
+                    <a href="#"><img src={oneProduct.images[0]} alt="Nature"   width="100%"/></a>
                      <div>
                          <hr />
                         
@@ -115,7 +119,9 @@ function DetailPage() {
                         
                         </Form> 
                     </div>
+                    <Button variant="primary" onClick={goBack} style={{marginRight: "2em"}}>&larr; Back</Button>
                     <Button variant="primary" onClick={addToCart}>Add to Cart</Button>  
+                    
                     
             </div>
             <div className="card_detail">

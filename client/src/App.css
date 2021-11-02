@@ -84,7 +84,7 @@ Form {
 }
 .card_details {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
-  width: 30%;
+  width: 50%;
   transition: 0.4s;
   text-align: center;
   float: left;
