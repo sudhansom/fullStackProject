@@ -1,12 +1,15 @@
+import { OrdersDocument } from '../../../../src/models/Orders'
 import {ProductDocument} from '../../../../src/models/Product'
 export type DefaultProductState = {
     product: ProductDocument[]
     err: any
+    order: OrdersDocument[]
 }
 
 const defaultState: DefaultProductState = {
     product: [],
-    err: ''
+    err: '',
+    order:[]
 }
 const productReducer = (state=defaultState, action: any) => {
     switch (action.type) {
@@ -21,6 +24,11 @@ const productReducer = (state=defaultState, action: any) => {
             return {
                 ...state,
                 err: action.payload
+            }
+        case "SAVE_ORDER":
+            return{
+                ...state,
+                order: action.payload
             }
     
         default:

@@ -5,6 +5,7 @@ import { DefaultUserState } from "./userReducer";
 import { DefaultProductState } from "./productReducer";
 import {UserDocument} from '../../../../src/models/Users'
 import {ProductDocument} from '../../../../src/models/Product'
+import {OrdersDocument} from '../../../../src/models/Orders'
 
 
 const allReducres = combineReducers({
@@ -27,6 +28,7 @@ export const preloadedState: PreloadedState = {
     },
     productReducer: {
         product:localStorage.getItem('product')?(JSON.parse(localStorage.getItem('product') as string)) as ProductDocument[]:[],
+        order:localStorage.getItem('product')?(JSON.parse(localStorage.getItem('order') as string)) as OrdersDocument[]:[],
         err: ''
 
     }

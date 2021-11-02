@@ -4,8 +4,9 @@ import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {ProductDocument} from '../../../src/models/Product'
 import { VariantDocument } from '../../../src/models/Variant'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {Store} from '../redux/reducers/index'
+import {getOrder} from '../redux/action'
 
 type Fields = {
     [key: string]:string
@@ -16,6 +17,7 @@ const redirectPage = ()=>{
 }
 
 function CartPage() {
+    const dispatch = useDispatch()
     const [total, setTotal] = useState<Number>(0)
     const cart: ProductDocument[] = JSON.parse(localStorage.getItem('product') as string) 
     const products = useSelector((state: Store)=>state.productReducer.product)
@@ -45,10 +47,10 @@ function CartPage() {
     }
     
     const myOrder: Order = {
-        totalPrice: 0,
+        totalPrice: products[0].price,
         users:['itsme'],
         orderItem: {},
-        totalQuantity: 0,
+        totalQuantity: 1,
     }
         const firstProduct = products[0]._id
         myOrder.orderItem[firstProduct] = {
@@ -96,6 +98,7 @@ function CartPage() {
     return myOrder
 }
 const myOrder = finishOrdering()
+dispatch(getOrder(myOrder))
 
 const allProducts = Object.keys(myOrder.orderItem)
 console.log(allProducts)

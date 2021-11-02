@@ -16,9 +16,11 @@ storeFactory().subscribe(()=>{
     const user = currentState.userReducer.user
     const isLoggedIn = currentState.userReducer.isLoggedIn
     const product = currentState.productReducer.product
+    const order = currentState.productReducer.order
     
     localStorage.setItem('user',JSON.stringify(user))
     localStorage.setItem('product',JSON.stringify(product))
+    localStorage.setItem('order',JSON.stringify(order))
     localStorage.setItem('isLoggedIn',JSON.stringify(isLoggedIn))
 
 

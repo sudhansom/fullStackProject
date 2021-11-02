@@ -72,3 +72,14 @@ export const onErrorProduct = (err: any) => {
     }
 }
 
+export const getOrder = (order: any) => {
+    // let orderList = localStorage.getItem('order')?(JSON.parse(localStorage.getItem('order') as string)):[]
+    // orderList = [...orderList, order]
+    localStorage.setItem('order', JSON.stringify(order))
+
+    return {
+        type: "SAVE_ORDER",
+        payload: order
+    }
+}
+
