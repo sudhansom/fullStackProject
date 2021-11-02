@@ -104,13 +104,17 @@ const allProducts = Object.keys(myOrder.orderItem)
 console.log(allProducts)
 
 console.log('images',myOrder.orderItem[allProducts[0]].variant[0], myOrder.totalPrice)
+const goBack = () => {
+    //eslint-disable-next-line
+    location.href='/products'
+}
 
     return (
         <div className="homePage">
             <Navbar />
             <Card className="cartContainer">
                 <Row>
-                    <Col><Button variant="info" style={{width:"100%"}}>Back</Button></Col>
+                    <Col><Button variant="info" onClick={goBack} style={{width:"100%"}}>&larr; Back</Button></Col>
                 </Row>
 
                 <Row className="heading">
