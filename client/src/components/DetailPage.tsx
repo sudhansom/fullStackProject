@@ -4,13 +4,11 @@ import {useDispatch, useSelector} from "react-redux"
 
 import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
 import image from '../images/abc.png'
-import watch1 from '../images/watch1.png'
-import watch2 from '../images/watch2.png'
-import watch3 from '../images/watch3.png'
 import axios from 'axios'
 
-import { getProduct } from '../redux/action'
+import { getProduct, getOneProduct } from '../redux/action'
 import { ProductDocument } from '../../../src/models/Product'
+import { Store } from '../redux/reducers'
 
 
 type Params = {
@@ -26,20 +24,23 @@ function DetailPage() {
     const [picture, setPicture] = useState(image)
     const [product, setProduct] = useState<ProductDocument | null>(null)
     const { productId } = useParams<Params>()
+    const oneProduct = useSelector((state: Store) => state.productReducer.oneProduct)
 
+    useEffect(()=>{
+        dispatch(getOneProduct(productId))
+    }, [productId])
+    console.log('oneProduct....',oneProduct)
     const [variant, setVariant] = useState<VariantDocument>({
         brand: "ios",
         size: "red",
         color: "small"
     })
     
-    
-    
     console.log(product)
 
     const changePicture = ()=> {
         console.log("clicked picture....")
-        setPicture(watch1)
+       // setPicture(watch1)
     }
 
     const addToCart = (e: React.MouseEvent<HTMLButtonElement>)=>{
@@ -52,27 +53,33 @@ function DetailPage() {
         values[val] = e.target.value
         setVariant(values)
     }
+
+    // for (let i=0; i<oneProduct.images.length; i++){
+    //     let itemName = 'name' + i.toString()
+    //     itemName = oneProduct.images[i]
+    // }
+        
            
     return (
         
             <div className="detail">
                 <div className="side_details">
                     <div className="each_photo">
-                        <img src={watch1} alt="Nature"   width="100%" onClick={changePicture}/>
+                        <img src={oneProduct.images[0]} alt="Nature"   width="100%" onClick={changePicture}/>
                     </div>
                     <hr />
                     <div className="each_photo">
-                        <a href="/"><img src={watch2} alt="Nature"   width="100%"/></a> 
+                        <a href="/"><img src={oneProduct.images[0]} alt="Nature"   width="100%"/></a> 
                     </div>
                     <hr />
                     <div className="each_photo">
-                        <a href="/"><img src={watch3} alt="Nature"   width="100%"/></a> 
+                        <a href="/"><img src={oneProduct.images[0]} alt="Nature"   width="100%"/></a> 
                     </div>
                     <hr />
                
                 </div>
                 <div className="card_details" >
-                    <a href="/"><img src={picture} alt="Nature"   width="100%"/></a>
+                    <a href="/"><img src={oneProduct.images[0]} alt="Nature"   width="100%"/></a>
                      <div>
                          <hr />
                         
@@ -111,16 +118,19 @@ function DetailPage() {
                     <Button variant="primary" onClick={addToCart}>Add to Cart</Button>  
                     
             </div>
-            {/* <div className="card_details">
+            <div className="card_detail">
                     <div>
-                        <a href="/"><img src={image} alt="Nature"   width="20%"/></a>
-                        <a href="/"><img src={image} alt="Nature"   width="20%"/></a>
-                        <a href="/"><img src={image} alt="Nature"   width="20%"/></a>
+                        <h3 style={{marginLeft: "5em"}}>Detail of the item</h3>
+                        <hr />
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi illo mollitia quam expedita sunt fuga dolorem consectetur quae nulla dolores. Doloribus, iure. Culpa cum repellendus accusantium molestias rem, veniam ex!</p>
+
                     </div>
                     
+
+                    
                    
-                    <Button variant="primary" onClick={(e)=>{addToCart(e)}}>Add to Cart</Button>     
-            </div> */}
+                         
+            </div>
         </div>
        
     )

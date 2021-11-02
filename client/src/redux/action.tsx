@@ -83,8 +83,34 @@ export const getOrder = (order: any) => {
     }
 }
 
+export const getOneProduct = (productId: string) => {
+    return async (dispatch: any, getState: any ) => {
+        try{
+            const url = `http://localhost:5000/api/v1/products/${productId}`
+            const result = await axios.get(url)
+            const oneProduct = result.data as ProductDocument
+            localStorage.setItem('oneProduct', JSON.stringify(oneProduct))
+            dispatch(successOneProduct(oneProduct))
+        }catch(err){
+            dispatch(failureOneProduct(err))
+        }
+    }
+}
+export const successOneProduct = (oneProduct: ProductDocument) => {
+    return {
+        type: "SUCCESS_ONE_PRODUCT",
+        payload: oneProduct,
+    }
+}
+export const failureOneProduct = (err: any) => {
+    return {
+        type: "FAILURE_ONE_PRODUCT",
+        payload: err,
+    }
+}
+
 export const saveOrderToDataBase = (order: any) => {
-    console.log('hello hello hello.....')
+
     return async (dispatch: any, getState: any) => {
         try{
             const userId = getState().userReducer.user._id

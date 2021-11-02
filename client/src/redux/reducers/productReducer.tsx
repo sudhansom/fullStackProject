@@ -4,12 +4,14 @@ export type DefaultProductState = {
     product: ProductDocument[]
     err: any
     order: OrdersDocument[]
+    oneProduct: ProductDocument | null
 }
 
 const defaultState: DefaultProductState = {
     product: [],
     err: '',
-    order:[]
+    order:[],
+    oneProduct: null,
 }
 const productReducer = (state=defaultState, action: any) => {
     switch (action.type) {
@@ -29,6 +31,11 @@ const productReducer = (state=defaultState, action: any) => {
             return{
                 ...state,
                 order: action.payload
+            }
+        case "SUCCESS_ONE_PRODUCT":
+            return{
+                ...state,
+                oneProduct: action.payload
             }
     
         default:

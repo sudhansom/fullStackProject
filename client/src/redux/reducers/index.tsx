@@ -29,8 +29,8 @@ export const preloadedState: PreloadedState = {
     productReducer: {
         product:localStorage.getItem('product')?(JSON.parse(localStorage.getItem('product') as string)) as ProductDocument[]:[],
         order:localStorage.getItem('product')?(JSON.parse(localStorage.getItem('order') as string)) as OrdersDocument[]:[],
-        err: ''
-
+        err: '',
+        oneProduct:localStorage.getItem('oneProduct')?(JSON.parse(localStorage.getItem('oneProduct') as string)) as ProductDocument | null:null,
     }
 }
 
