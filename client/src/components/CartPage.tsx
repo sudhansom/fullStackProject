@@ -27,6 +27,7 @@ function CartPage() {
     }
     type Item = {
         name: string,
+        price: number,
         images: string[],
         variant: Variant,
         quantity: number,
@@ -52,6 +53,7 @@ function CartPage() {
         const firstProduct = products[0]._id
         myOrder.orderItem[firstProduct] = {
             name : products[0].name,
+            price: products[0].price,
             images : products[0].images,
             variant: products[0].variant,
             quantity: 1
@@ -69,6 +71,7 @@ function CartPage() {
             myOrder.orderItem[products[i]._id] = {
             name : products[i].name,
             images : products[i].images,
+            price : products[i].price,
             variant: products[i].variant,
             quantity: 1
         }
@@ -87,9 +90,8 @@ const myOrder = finishOrdering()
 
 const allProducts = Object.keys(myOrder.orderItem)
 console.log(allProducts)
-for (let x of allProducts){
-    console.log('myOrder', myOrder.orderItem[x])
-}
+
+console.log('images',myOrder.orderItem[allProducts[0]].variant[0], myOrder.totalPrice)
 
     return (
         <div className="homePage">
@@ -102,15 +104,16 @@ for (let x of allProducts){
                 <Row className="heading">
                     <Col>Item</Col> <Col>Name</Col><Col>Quantity</Col><Col>Total</Col><Col>Variant</Col><Col>Remove</Col>
                 </Row>
-                {cart && cart.map(elem=>{
+                {allProducts && allProducts.map(elem=>{
                     return (
                     <Row>
                         <hr/>
-                        <Col><img src={elem.images[0]} height="60px" width="100px"></img></Col> 
-                        <Col>{elem.name}</Col>
-                        <Col>{elem.quantity}</Col>
-                        <Col>{elem.price}</Col>
-                        <Col>{elem.variant.map(el => {return (<div><span>{el['brand']}</span> / <span>{el['color']}</span> / <span>{el['size']}</span></div>)})}</Col>
+                        <Col><img src={myOrder.orderItem[elem].images[0]} height="60px" width="100px"></img></Col> 
+                        <Col>{myOrder.orderItem[elem].name}</Col>
+                        <Col>{myOrder.orderItem[elem].quantity}</Col>
+                        <Col>{myOrder.orderItem[elem].price}</Col>
+                        <Col>{myOrder.orderItem[elem].variant[0]['brand']}/{myOrder.orderItem[elem].variant[0]['size']}/{myOrder.orderItem[elem].variant[0]['color']}</Col>
+                        {/* (el: Variant => {return (<div><span>{el['brand']}</span> / <span>{el['color']}</span> / <span>{el['size']}</span></div>)})}</Col> */}
                         <Col>X</Col>
                         
                     </Row>
@@ -119,7 +122,7 @@ for (let x of allProducts){
                 )})}
                 <hr/>
                 <Row className="heading">
-                    <Col>Total quantity: {cart && cart.length}</Col> <Col>Total price: 444</Col>
+                    <Col>Total quantity: {myOrder.totalQuantity}</Col> <Col>Total price: {myOrder.totalPrice}</Col>
                 </Row>
                 
                 <Row className="heading">
