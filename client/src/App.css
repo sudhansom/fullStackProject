@@ -34,6 +34,12 @@
   justify-items: center;
   margin-top: 0.5em;
 }
+.leftSide1 {
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  margin-top: 0.5em;
+}
 .rightSide {
   display: flex;
   width: 22%;
