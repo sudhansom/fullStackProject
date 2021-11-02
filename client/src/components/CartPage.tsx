@@ -63,17 +63,26 @@ function CartPage() {
     for (let i=1; i<products.length; i++){
         console.log('inside product: ', products[i]._id)
         const allKeys = Object.keys(myOrder.orderItem)
-        if(allKeys.includes(products[i]._id) ){ //&& myOrder.orderItem[products[i]._id].variant[0]['brand']===products[i].variant[0]['brand'] && myOrder.orderItem[products[i]._id].variant[0]['size']===products[i].variant[0]['size'] && myOrder.orderItem[products[i]._id].variant[0]['color']===products[i].variant[0]['color'] ){
-
-            myOrder.orderItem[products[i]._id].quantity += 1
-        }else{
-           
-            myOrder.orderItem[products[i]._id] = {
-            name : products[i].name,
-            images : products[i].images,
-            price : products[i].price,
-            variant: products[i].variant,
-            quantity: 1
+        let a = true
+        while(a){
+            if(allKeys.includes(products[i]._id) ){ 
+                if (myOrder.orderItem[products[i]._id].variant[0]['brand']===products[i].variant[0]['brand'] && myOrder.orderItem[products[i]._id].variant[0]['size']===products[i].variant[0]['size'] && myOrder.orderItem[products[i]._id].variant[0]['color']===products[i].variant[0]['color'] ){
+                myOrder.orderItem[products[i]._id].quantity += 1
+                a = false
+                }else{
+                    products[i]._id = products[i]._id + 'a'
+                }
+                
+            }else{
+            
+                myOrder.orderItem[products[i]._id] = {
+                name : products[i].name,
+                images : products[i].images,
+                price : products[i].price,
+                variant: products[i].variant,
+                quantity: 1
+            }
+            a = false
         }
          //console.log('1---',myOrder.orderItem[products[i]._id].variant, '2---', products[i].variant)
         }
@@ -111,7 +120,7 @@ console.log('images',myOrder.orderItem[allProducts[0]].variant[0], myOrder.total
                         <Col><img src={myOrder.orderItem[elem].images[0]} height="60px" width="100px"></img></Col> 
                         <Col>{myOrder.orderItem[elem].name}</Col>
                         <Col>{myOrder.orderItem[elem].quantity}</Col>
-                        <Col>{myOrder.orderItem[elem].price}</Col>
+                        <Col>{(myOrder.orderItem[elem].price)*(myOrder.orderItem[elem].quantity)}</Col>
                         <Col>{myOrder.orderItem[elem].variant[0]['brand']}/{myOrder.orderItem[elem].variant[0]['size']}/{myOrder.orderItem[elem].variant[0]['color']}</Col>
                         {/* (el: Variant => {return (<div><span>{el['brand']}</span> / <span>{el['color']}</span> / <span>{el['size']}</span></div>)})}</Col> */}
                         <Col>X</Col>
