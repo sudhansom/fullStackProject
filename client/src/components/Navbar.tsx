@@ -9,7 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 function Navbar() {
     //const isLoggedIn = useSelector(state=>state.userReducer.isLoggedIn) 
     const clearLocalStorage = () => {
-        localStorage.clear()
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+        localStorage.removeItem('isLoggedIn')
         //eslint-disable-next-line
         location.href='/';
     }

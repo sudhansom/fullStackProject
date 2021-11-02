@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {Store} from '../redux/reducers/index'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import {ProductDocument} from '../../../src/models/Product'
 import {UserDocument} from '../../../src/models/Users'
@@ -83,3 +83,44 @@ export const getOrder = (order: any) => {
     }
 }
 
+export const saveOrderToDataBase = (order: any) => {
+    console.log('hello hello hello.....')
+    return async (dispatch: any, getState: any) => {
+        try{
+            const userId = getState().userReducer.user._id
+            //order.users.push(userId)
+            const url = `http://localhost:5000/api/v1/users/${userId}`
+            const result = await axios.get<any>(url)
+            console.log('User is after: ---', result.data)
+            
+            order.users = []
+            order.completed = true
+            order.users.push(userId)
+            console.log('Order saved', order)
+            const createdOrder = await axios.post<any>(`http://localhost:5000/api/v1/orders`, order)
+            console.log('created Order', createdOrder.data._id)
+            const updatedUser = await axios.put(url, {order: [createdOrder.data._id]})
+            console.log('updatedUser:---',updatedUser)
+            if(updatedUser){
+                localStorage.removeItem('product')
+            }
+            dispatch(onErrorSavingToDataBase('err'))
+
+        }catch(err){
+            dispatch(onErrorSavingToDataBase(err))
+        }
+    }
+}
+
+export const onErrorSavingToDataBase = (err: any) => {
+    return {
+        type: "ON_ERROR_PRODUCT",
+        payload: err,
+    }
+}
+
+export const logOutUser = () => {
+    return {
+        type: "LOGOUT_USER"
+    }
+}

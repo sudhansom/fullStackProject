@@ -17,10 +17,9 @@ const findById = async (userId: string): Promise<UserDocument> => {
   return foundUser
 }
 
-const update = async (
-  userId: string,
-  update: Partial<UserDocument>
-): Promise<UserDocument | null> => {
+const update = async (userId: string, update: Partial<UserDocument>) => {
+  //Promise<UserDocument | null>
+  console.log('userId here in service:--', update)
   const foundUser = await Users.findByIdAndUpdate(userId, update, {
     new: true,
   })

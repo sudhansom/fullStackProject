@@ -1,26 +1,9 @@
 import mongoose, { Document } from 'mongoose'
+import { ProductDocument } from './Product'
 
 export type OrderItemDocument = Document & {
-  quantity: number
-  orderedDate: Date
-  product: string[]
+  [key: string]: ProductDocument | null
 }
 
-const orderItemSchema = new mongoose.Schema({
-  quantity: {
-    type: Number,
-    default: 0,
-  },
-  orderedDate: {
-    type: Date,
-    default: Date.now,
-    required: true,
-  },
-  product: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product',
-    },
-  ],
-})
+const orderItemSchema = new mongoose.Schema({})
 export default orderItemSchema

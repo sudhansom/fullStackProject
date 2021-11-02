@@ -5,7 +5,7 @@ import orderItemSchema, { OrderItemDocument } from './OrderItem'
 export type OrdersDocument = Document & {
   totalPrice: number
   users: UserDocument[]
-  orderItem: OrderItemDocument[]
+  orderItem: OrderItemDocument
   completed: boolean
 }
 const ordersSchema = new mongoose.Schema({
@@ -20,7 +20,7 @@ const ordersSchema = new mongoose.Schema({
       ref: 'Users',
     },
   ],
-  orderItem: [orderItemSchema],
+  orderItem: '',
   completed: {
     type: Boolean,
     default: false,

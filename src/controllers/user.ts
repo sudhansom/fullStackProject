@@ -65,7 +65,7 @@ export const updateUser = async (
   next: NextFunction
 ) => {
   const user = req.user
-  console.log('user now:-', user)
+  console.log('user now:-', req.body)
   try {
     const update = req.body
     const userId = req.params.userId
