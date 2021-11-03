@@ -33,14 +33,15 @@ function ShowProducts() {
                 { allDatas.map(item => {return (
                     // just to check github
                     <div className="card">
-                        <a href={`/details/${item._id}`}><img src={item.images[0]} alt="Nature"   width="253px" height="170px"/></a>
+                        <a href={`/details/${item._id}`}><img src={item.images[0]} alt="Nature"   width="100%" height="170px"/></a>
                         <div className="details">
                             <h3>{item.name}</h3>
                             <h5>{item.price} DKK</h5>
                             {/*<Button variant="primary" onClick={(e)=>{addToCart(e, item)}}>See More</Button>*/}
                             <Link to={`/details/${item.id}`}   />
+                    </div>
                         
-                        </div>
+                        
                    
                 </div> 
                 )})}
