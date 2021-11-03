@@ -7,6 +7,7 @@ import {
   createProduct,
   deleteProduct,
   updateProduct,
+  adminCheck,
 } from '../controllers/product'
 
 const router = express.Router()

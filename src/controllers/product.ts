@@ -108,3 +108,21 @@ export const updateProduct = async (
     }
   }
 }
+
+export const adminCheck = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    console.log(req.body)
+    console.log('----0-----')
+    //next()
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
