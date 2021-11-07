@@ -16,6 +16,10 @@ router.get('/', findAll)
 router.get('/:productId', findById)
 router.post('/', createProduct)
 router.delete('/:productId', deleteProduct)
-router.put('/:productId', updateProduct)
+router.put(
+  '/:productId',
+  passport.authenticate('jwt', { session: false }),
+  updateProduct
+)
 
 export default router
