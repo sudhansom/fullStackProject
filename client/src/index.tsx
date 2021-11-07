@@ -12,6 +12,7 @@ import storeFactory from './redux/store'
 
 axios.interceptors.request.use(request => {
   const token = localStorage.getItem('token') as string
+  console.log("----------------------------**********  am i executed ??  ************----------------------------------------")
   const requestHeader = {
     Authorization: `Bearer ${token}`
   }
