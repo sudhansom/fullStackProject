@@ -115,9 +115,8 @@ export const adminCheck = async (
   next: NextFunction
 ) => {
   try {
-    console.log(req.user)
+    console.log('=-=-=-=-', req.user)
     console.log('---- Admin check -----')
-
     next()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
