@@ -26,6 +26,7 @@ export const jwtStrategy = new JwtStrategy(
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   },
   async (payload: any, done: any) => {
+    console.log('HELLO HELLO HELLO... PASSPORT')
     const { email } = payload.userData
     const user = await UserService.findByEmail(email)
     done(null, user)
