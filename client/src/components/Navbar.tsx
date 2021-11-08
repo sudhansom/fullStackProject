@@ -29,6 +29,7 @@ function Navbar() {
                     
                 </li>
                 <li><a href='/products/'>Products</a></li>
+                <li><a href='/addProduct'>Add Product</a></li>
             </ul>
             <div>
                 

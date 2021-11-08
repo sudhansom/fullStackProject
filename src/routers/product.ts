@@ -19,7 +19,7 @@ router.delete('/:productId', deleteProduct)
 router.put(
   '/:productId',
   passport.authenticate('jwt', { session: false }),
-  //adminCheck,
+  adminCheck,
   updateProduct
 )
 

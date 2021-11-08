@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express'
 import { BadRequestError } from '../helpers/apiError'
 import ProductService from '../services/product'
 import Product from '../models/Product'
+import { UserDocument } from '../models/Users'
 
 export const findAll = async (
   req: Request,
@@ -115,9 +116,12 @@ export const adminCheck = async (
   next: NextFunction
 ) => {
   try {
-    console.log('=-=-=-=-', req.user)
+    const user = req.user as UserDocument | null
+    //console.log('=-=-=-=-', user)
     console.log('---- Admin check -----')
-    next()
+    if (user && user.email === 'urmi') {
+      next()
+    }
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
