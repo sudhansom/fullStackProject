@@ -14,8 +14,16 @@ const router = express.Router()
 
 router.get('/', findAll)
 router.get('/:productId', findById)
-router.post('/', createProduct)
-router.delete('/:productId', deleteProduct)
+router.post(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  createProduct
+)
+router.delete(
+  '/:productId',
+  passport.authenticate('jwt', { session: false }),
+  deleteProduct
+)
 router.put(
   '/:productId',
   passport.authenticate('jwt', { session: false }),
