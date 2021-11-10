@@ -18,7 +18,7 @@ router.post('/', createUser)
 router.get('/:userId', findById)
 router.post('/login', emailPasswordCheck, findOrCreate)
 router.post('/register', createUser, findOrCreate)
-router.put('/:userId', updateUser) //passport.authenticate('jwt', {session: false}),
+router.put('/:userId', updateUser)
 router.delete(
   '/:userId',
   passport.authenticate('jwt', { session: false }),
