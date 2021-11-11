@@ -1,5 +1,5 @@
 FROM node:alpine
-WORKDIR : /app
+WORKDIR /app
 COPY package.json yarn.lock ./
 RUN npm install
 RUN npm install -D concurrently
