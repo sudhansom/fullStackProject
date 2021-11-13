@@ -2,9 +2,7 @@ import React, {useState} from 'react'
 import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
-import {ProductDocument} from '../../../src/models/Product'
-import { validateLocaleAndSetLanguage } from 'typescript'
-import {VariantDocument} from '../../../src/models/Variant'
+
 type Fields = {
     [key: string]: string | string[] | boolean | number | VariantDocument[]
 }
