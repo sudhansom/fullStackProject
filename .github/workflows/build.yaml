@@ -19,8 +19,8 @@ jobs:
         run: npm install
       - name: Build dist
         run: yarn run build-ts
-      - name: Run test
-        run: yarn run test
+      #- name: Run test
+      #run: yarn run test
       - name: Build docker image
         run: docker build . -t bkspoudel/fullstackproject-ci
       - name: Login to Docker Hub
