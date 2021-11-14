@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import bcrypt from 'bcryptjs'
 import { Link } from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux"
 
@@ -21,6 +22,7 @@ type Fields = {
 
 
 function LoginPage(){
+  //const bcrypt = require('bcryptjs')
   const dispatch = useDispatch()
   const [loggedIn, setLoggedIn] = useState(false)
   const [fields, setFields] = useState<Fields>({
@@ -32,17 +34,26 @@ function LoginPage(){
   const updateFields = (e: React.ChangeEvent<HTMLInputElement>, val: string) => {
     const values = {...fields}
     values[val] = e.target.value
+    // if(val==='password'){
+    //   const hashedPassword = bcrypt.hashSync(e.target.value, bcrypt.genSaltSync());
+    //   const doesPasswordMatch = bcrypt.compareSync(yourPasswordFromLoginForm, yourHashedPassword)
+
+    //   values[val] = hashedPassword
+    // }else{
+    //   values[val] = e.target.value
+    // }
     setFields(values)
   }
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const url = 'http://localhost:5000/api/v1/users/login'
-    //const users = await axios.post<any>('http://localhost:5000/api/v1/users/login', fields)
-    dispatch(getUser(url, fields))
-    if(localStorage.getItem('token') as string){
-      //eslint-disable-next-line
-      location.href = "/";
-    }
+    console.log(fields)
+    // const url = 'http://localhost:5000/api/v1/users/login'
+    // //const users = await axios.post<any>('http://localhost:5000/api/v1/users/login', fields)
+    // dispatch(getUser(url, fields))
+    // if(localStorage.getItem('token') as string){
+    //   //eslint-disable-next-line
+    //   location.href = "/";
+    //}
     
   }
     return (
