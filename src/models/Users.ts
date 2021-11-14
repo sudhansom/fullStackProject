@@ -8,6 +8,7 @@ export type UserDocument = Document & {
   address: AddressDocument[]
   order: string[]
   password: string
+  role: string
 }
 
 const userSchema = new mongoose.Schema({
@@ -27,6 +28,9 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
   password: {
+    type: String,
+  },
+  role: {
     type: String,
   },
   address: [addressSchema],

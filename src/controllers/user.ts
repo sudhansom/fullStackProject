@@ -34,6 +34,7 @@ export const createUser = async (
       email,
       address = [],
       order = [],
+      role = '',
     } = req.body
     const newUser = new Users({
       firstName,
@@ -42,11 +43,20 @@ export const createUser = async (
       address,
       order,
       password,
+      role,
     })
     console.log(newUser)
     const result = await UserService.create(newUser)
-    const sendResult = { firstName, lastName, password, email, address, order }
-    const user = { firstName, lastName, password, email, address, order }
+    const sendResult = {
+      firstName,
+      lastName,
+      password,
+      email,
+      address,
+      order,
+      role,
+    }
+    const user = { firstName, lastName, password, email, address, order, role }
     req.user = user
     next()
     //res.json(sendResult)
@@ -154,6 +164,7 @@ export const registerUser = async (
       email,
       address = [],
       order = [],
+      role = '',
     } = req.body
     const newUser = new Users({
       firstName,

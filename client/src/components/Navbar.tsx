@@ -29,7 +29,7 @@ function Navbar() {
                     
                 </li>
                 <li><a href='/products/'>Products</a></li>
-                <li><a href='/addProduct'>Add Product</a></li>
+                <li><a href='/addProduct' style={{display: isLoggedIn?'block':'none'}}>Add Product</a></li>
             </ul>
             <div>
                 
