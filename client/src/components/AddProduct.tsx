@@ -144,4 +144,3 @@ const updateVariants = (e: React.ChangeEvent<HTMLSelectElement>, val: string) =>
 }
 
 export default AddProduct
-// added a comment line....
