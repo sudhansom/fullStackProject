@@ -150,3 +150,31 @@ export const logOutUser = () => {
         type: "LOGOUT_USER"
     }
 }
+
+type GenericAction<T> = {
+    type: T
+}
+type GenericActionWithPayload<T, K> ={
+    type: T
+    payload: K
+}
+
+type LogOutUser = GenericAction<'LOGOUT_USER'>
+type OnErrorSavingToDataBase = GenericActionWithPayload<'ON_ERROR_PRODUCT', any>
+type SuccessOneProduct = GenericActionWithPayload<'SUCCESS_ONE_PRODUCT', ProductDocument>
+type FailureOneProduct = GenericActionWithPayload<'FAILURE_ONE_PRODUCT', any>
+type GetOrder = GenericActionWithPayload<'SAVE_ORDER', any>
+type OnErrorProduct = GenericActionWithPayload<'ON_ERROR_PRODUCT', any>
+type OnErrorUser = GenericActionWithPayload<'ON_ERROR_USER', any>
+type SuccessProduct = GenericActionWithPayload<'PRODUCT_SUCCESS', any>
+type SuccessUser = GenericActionWithPayload<'USER_SUCCESS', UserDocument>
+
+export type AllActions = 
+ SuccessUser |
+ LogOutUser |
+ OnErrorSavingToDataBase | 
+ SuccessOneProduct | 
+ FailureOneProduct | 
+ GetOrder | 
+ OnErrorProduct | OnErrorUser | SuccessProduct
+

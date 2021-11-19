@@ -1,4 +1,5 @@
 import {UserDocument} from '../../../../src/models/Users'
+import { AllActions } from '../action'
 export type DefaultUserState = {
     user: UserDocument | null,
     err: any,
@@ -10,7 +11,7 @@ const defaultState: DefaultUserState = {
     err: '',
     isLoggedIn: false,
 }
-const userReducer = (state=defaultState, action: any) => {
+const userReducer = (state=defaultState, action: AllActions) => {
     switch (action.type) {
         case "USER_SUCCESS":
             return {
