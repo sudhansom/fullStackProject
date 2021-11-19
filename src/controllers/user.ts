@@ -131,6 +131,7 @@ export const emailPasswordCheck = async (
   next: NextFunction
 ) => {
   try {
+    console.log('am here to check the email existence..')
     const email: string = req.body.email
     const password: string = req.body.password
     const user: UserDocument | null = await UserService.findByEmail(email)
