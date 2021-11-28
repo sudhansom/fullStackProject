@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux'
 import './App.css';
 
 
+
 import { Switch, Route } from 'react-router-dom';
 
 import LoginPage from './components/LoginPage'
@@ -17,6 +18,7 @@ import HomePage from './components/HomePage';
 import CartPage from './components/CartPage';
 import BuyNow from './components/BuyNow'
 import {Store} from './redux/reducers'
+import Bitcoin from './components/Bitcoin';
 
 
 
