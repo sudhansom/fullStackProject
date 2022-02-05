@@ -18,7 +18,7 @@ import HomePage from './components/HomePage';
 import CartPage from './components/CartPage';
 import BuyNow from './components/BuyNow'
 import {Store} from './redux/reducers'
-import Bitcoin from './components/Bitcoin';
+
 
 
 
