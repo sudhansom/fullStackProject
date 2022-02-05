@@ -6,12 +6,12 @@ import {useDispatch, useSelector} from "react-redux"
 import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import image from '../images/abc.png'
-import jwt_decode from 'jwt-decode'
-import { GoogleLogin } from 'react-google-login';
-import axios from 'axios'
+// import image from '../images/abc.png'
+// import jwt_decode from 'jwt-decode'
+// import { GoogleLogin } from 'react-google-login';
+// import axios from 'axios'
 
-import { getUser } from '../redux/action'
+// import { getUser } from '../redux/action'
 
 type Response = {
   token: string
