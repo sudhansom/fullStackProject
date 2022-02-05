@@ -5,8 +5,8 @@ import { Button, Card, Container, Form, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {UserDocument} from '../../../src/models/Users'
 
-import image from '../images/abc.png'
-import jwt_decode from 'jwt-decode'
+// import image from '../images/abc.png'
+// import jwt_decode from 'jwt-decode'
 import { GoogleLogin } from 'react-google-login';
 import axios from 'axios'
 
