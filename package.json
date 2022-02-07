@@ -48,7 +48,7 @@
     "lodash": "^4.17.15",
     "lusca": "^1.7.0",
     "mongodb-memory-server": "^6.3.1",
-    "mongoose": "^5.11.15",
+    "mongoose": "^5.13.14",
     "nodemailer": "^6.4.3",
     "passport": "^0.4.1",
     "passport-google-id-token": "^0.4.7",
