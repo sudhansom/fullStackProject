@@ -43,3 +43,6 @@ dist/**/*
 
 *.swo
 *.swp
+
+# Local Netlify folder
+.netlify
