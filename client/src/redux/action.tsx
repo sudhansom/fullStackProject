@@ -30,7 +30,7 @@ export const getProduct = (productId: string, variants: Fields) => {
         'product',
         JSON.stringify([...productList, product.data])
       )
-      dispatch(successProduct([...productList, product.data]))
+      dispatch(successProduct([...productList, product.data])) // the value of localStorage sent to redux
     } catch (err) {
       dispatch(onErrorProduct(err))
     }

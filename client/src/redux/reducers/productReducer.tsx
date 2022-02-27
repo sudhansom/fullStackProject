@@ -8,10 +8,10 @@ export type DefaultProductState = {
 }
 
 const defaultState: DefaultProductState = {
-  product: [],
+  product: [], //product on cart
   err: '',
   order: [],
-  oneProduct: null,
+  oneProduct: null, // product clicked for view
 }
 const productReducer = (state = defaultState, action: any) => {
   switch (action.type) {
