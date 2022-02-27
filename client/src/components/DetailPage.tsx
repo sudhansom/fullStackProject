@@ -51,7 +51,7 @@ function DetailPage() {
   }
 
   const addToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('clicked one')
+    console.log('clicked one...')
     dispatch(getProduct(productId, variant))
     alert('product added to the cart')
   }
