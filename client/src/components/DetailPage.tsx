@@ -28,9 +28,10 @@ function DetailPage() {
   )
 
   useEffect(() => {
-    console.log('inside useEffect')
+    console.log('inside useEffect...')
     dispatch(getOneProduct(productId))
   }, [productId])
+
   console.log('oneProduct....', oneProduct)
   const [variant, setVariant] = useState<VariantDocument>({
     brand: 'ios',
@@ -80,11 +81,11 @@ function DetailPage() {
           />
         </div>
         <hr />
-        <div className="each_photo">
+        {/* <div className="each_photo">
           <a href="#">
             <img src={oneProduct.images[0]} alt="Nature" width="100%" />
           </a>
-        </div>
+        </div> */}
         <hr />
         <div className="each_photo">
           <a href="#">
