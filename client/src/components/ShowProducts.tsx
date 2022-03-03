@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom'
 
 import { ProductDocument } from '../../../src/models/Product'
 
-import { Button, Card, Container } from 'react-bootstrap'
+//import { Button, Card, Container } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import image from '../images/abc.png'
+//import image from '../images/abc.png'
 
 function ShowProducts() {
   const [allDatas, setAllDatas] = useState<ProductDocument[]>([])
   const getAllProduct = async () => {
     const allProducts = await axios.get<any>(
-      `http://localhost:5000/api/v1/products/`
+      `/products/` //`http://localhost:5000/api/v1/products/`
     )
     console.log('All Users: ', typeof allProducts)
     //localStorage.setItem('allUsers', JSON.stringify(allUsers.data))
@@ -26,18 +26,19 @@ function ShowProducts() {
   //const allData = JSON.parse(localStorage.getItem('allUsers') as string) as ProductDocument[]
   // console.log(allData)
 
-  const addToCart = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    abc: ProductDocument
-  ) => {
-    console.log('clicked one', abc)
-  }
+  // const addToCart = (
+  //   e: React.MouseEvent<HTMLButtonElement>,
+  //   abc: ProductDocument
+  // ) => {
+  //   console.log('clicked one', abc)
+  // }
   return (
     <div className="wrap">
       {allDatas.map((item) => {
         return (
           // just to check github
           <div className="card">
+            <p>something comming</p>
             <a href={`/details/${item._id}`}>
               <img
                 src={item.images[0]}

@@ -11,6 +11,10 @@ import { Provider } from 'react-redux'
 import storeFactory from './redux/store'
 
 //set Base urls for axios here....
+axios.defaults.baseURL = 'http://localhost:5000/api/v1'
+//'https://bhuwans-backend.herokuapp.com/api/v1'
+//process.env.REACT_API_BACKEND_URL
+//'http://localhost:5000/api/v1'
 
 axios.interceptors.request.use((request) => {
   const token = localStorage.getItem('token') as string
