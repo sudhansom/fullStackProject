@@ -11,10 +11,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 function ShowProducts() {
   const [allDatas, setAllDatas] = useState<ProductDocument[]>([])
+  console.log('baseUrl:', process.env.REACT_APP_BACKEND_URL)
   const getAllProduct = async () => {
-    const allProducts = await axios.get<any>(
-      `/products/` //`http://localhost:5000/api/v1/products/`
-    )
+    const allProducts = await axios.get<any>(`/products/`)
     console.log('All Users: ', typeof allProducts)
     //localStorage.setItem('allUsers', JSON.stringify(allUsers.data))
     setAllDatas(allProducts.data)

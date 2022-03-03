@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import './index.css'
@@ -11,16 +11,14 @@ import { Provider } from 'react-redux'
 import storeFactory from './redux/store'
 
 //set Base urls for axios here....
-axios.defaults.baseURL = 'http://localhost:5000/api/v1'
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL
+console.log('baseUrl:', process.env.REACT_APP_BACKEND_URL)
 //'https://bhuwans-backend.herokuapp.com/api/v1'
-//process.env.REACT_API_BACKEND_URL
+//process.env.REACT_APP_BACKEND_URL
 //'http://localhost:5000/api/v1'
 
 axios.interceptors.request.use((request) => {
   const token = localStorage.getItem('token') as string
-  console.log(
-    '-----------**********  am i executed ??  *********-------------------------------'
-  )
   const requestHeader = {
     Authorization: `Bearer ${token}`,
   }
