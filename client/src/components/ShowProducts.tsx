@@ -33,10 +33,10 @@ function ShowProducts() {
   // }
   return (
     <div className="wrap">
-      {allDatas.map((item) => {
+      {allDatas.map((item, index) => {
         return (
           // just to check github
-          <div className="card">
+          <div className="card" key={index}>
             <p>something comming</p>
             <a href={`/details/${item._id}`}>
               <img

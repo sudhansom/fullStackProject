@@ -139,9 +139,9 @@ function CartPage() {
           <Col>Remove</Col>
         </Row>
         {allProducts &&
-          allProducts.map((elem) => {
+          allProducts.map((elem, index) => {
             return (
-              <Row>
+              <Row key={index}>
                 <hr />
                 <Col>
                   <img
